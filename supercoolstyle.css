@@ -5,3 +5,6 @@
   font-family: 'Roboto Mono', monospace;
   color: red;
 }
+body {
+  background-image: url("wtf.jpg");
+}
