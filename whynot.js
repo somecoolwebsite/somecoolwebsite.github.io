@@ -31,4 +31,4 @@ function gotoxyz(x,y,z){
   this.y1 = dis*Math.cos(dir + (zrot)*Math.PI/180);
 }
 
-ctx.lineTo(gotoxyz(100,100,100).x,gotoxyz(100,100,100).y);
+ctx.lineTo(gotoxyz(100,100,100).x1,gotoxyz(100,100,100).y1);
