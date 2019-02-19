@@ -4,6 +4,7 @@ function Vector(x,y,z){
   this.z = z;
 }
 
+var px,py,pz,dis,dir;
 
 var c=document.getElementById("canvas");
 c.width  = window.innerWidth;
@@ -11,8 +12,8 @@ c.height = window.innerHeight;
 var ctx=c.getContext("2d");
 
 function pointto(x,y) {
-  this.dir = Math.atan2(x,y);
-  this.dis = Math.sqrt(x*x+y*y);
+  dir = Math.atan2(x,y);
+  dis = Math.sqrt(x*x+y*y);
 }
 
 function gotoxyz(x,y,z){
