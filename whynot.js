@@ -29,6 +29,7 @@ function gotoxyz(x,y,z){
   pointto(x1,y1); // Z rotation
   this.x1 = dis*Math.sin(dir + (zrot)*Math.PI/180);
   this.y1 = dis*Math.cos(dir + (zrot)*Math.PI/180);
+  return x1,y1,z1
 }
 
 ctx.lineTo(gotoxyz(100,100,100).x1,gotoxyz(100,100,100).y1);
