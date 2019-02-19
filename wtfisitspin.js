@@ -7,6 +7,5 @@ document.head.appendChild(s);
 document.addEventListener('click', function(e) {
     e = e || window.event;
     target = e.target || e.srcElement;
-    target.style.animation = "theepic 1s infinite";
-
+    target.style.animation = "theepic 1s linear infinite";
 }, false);
