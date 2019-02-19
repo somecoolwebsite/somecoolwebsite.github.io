@@ -3,8 +3,14 @@
 }
 #epic{
   font-family: 'Roboto Mono', monospace;
-  color: red;
+  color: white;
 }
 body {
   background-image: url("wtf.jpg");
+}
+pre {
+  color: white;
+}
+a {
+  color: lightblue;
 }
