@@ -1,7 +1,7 @@
+var target;
 document.addEventListener('click', function(e) {
     e = e || window.event;
-    var target = e.target || e.srcElement,
-     
+    target = e.target || e.srcElement
 }, false);
 var s = document.createElement("style");
 s.type='text/css';
