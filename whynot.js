@@ -5,7 +5,7 @@ function Vector(x,y,z){
 }
 
 
-var c=document.getElementById("myCanvas");
+var c=document.getElementById("canvas");
 c.width  = window.innerWidth;
 c.height = window.innerHeight;
 var ctx=c.getContext("2d");
