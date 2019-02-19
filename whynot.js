@@ -4,7 +4,7 @@ function Vector(x,y,z){
   this.z = z;
 }
 
-var px,py,pz,dis,dir;
+var px,py,pz,dis,dir,xrot,yrot,zrot;
 
 var c=document.getElementById("canvas");
 c.width  = window.innerWidth;
