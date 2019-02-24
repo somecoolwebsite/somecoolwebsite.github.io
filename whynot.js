@@ -39,5 +39,6 @@ function draw(){
 
 while(true){
   draw();
+  console.log("drawing");
 }
 
