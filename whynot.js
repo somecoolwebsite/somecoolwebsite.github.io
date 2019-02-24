@@ -33,8 +33,10 @@ function gotoxyz(x,y,z){
 }
 
 function draw(){
+  ctx.beginPath();
   ctx.moveTo(0,0);
   ctx.lineTo(gotoxyz(100,100,100).x1,gotoxyz(100,100,100).y1);
+  ctx.stroke();
 }
 
 while(true){
