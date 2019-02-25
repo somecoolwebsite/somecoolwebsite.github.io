@@ -17,6 +17,8 @@ var prevCore = [];
 var mouX;
 var mouY;
 
+startGame();
+
 function startGame() {
     resetButton = new gameObject(50, 20, "green", 100, 100);
     for (var i = 0; i < enemis; i++) {
