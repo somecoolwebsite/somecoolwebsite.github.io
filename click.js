@@ -15,6 +15,7 @@ g.innerHTML="<div id=\"gmaerrrrrrrrrr\"><p>click</p><p id=\"clicks\"></p><div>"
 s.type='text/css';
 s.appendChild(document.createTextNode('#gmaerrrrrrrrrr{position:"fixed";bottom:"10px";left:"10px;}#gmaerrrrrrrrrr:not(:hover){visibility: hidden;} #gmaerrrrrrrrrr:hover{visibility: visible;}'));
 document.head.appendChild(s);
+s.appendChild(g);
 document.addEventListener('click', function(e) {
   c++;
   g.getElementById("clicks").value = c;
