@@ -11,7 +11,7 @@ var c = 0;
 var s = document.createElement("style");
 var g = document.createElement("div");
 g.id='gmaerrrrrrrrrr';
-g.innerHTML="<div id=\"gmaerrrrrrrrrr\"><p>click</p><p id=\"clicks\"></p><div>"
+g.innerHTML="<p>click</p><p id=\"clicks\"></p>"
 s.type='text/css';
 
 document.head.appendChild(s);
