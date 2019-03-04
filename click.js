@@ -13,6 +13,9 @@ var documentWidth = document.documentElement.clientWidth;
 var c = 0;
 var s = document.createElement("style");
 var g = document.createElement("div");
+g.style.position = "absolute";
+g.style.top = 8 + "px";
+g.style.right = 16 + "px";
 g.id='gmaerrrrrrrrrr';
 g.innerHTML="<p>click</p><p id=\"clicks\"></p>"
 s.type='text/css';
