@@ -18,5 +18,5 @@ document.head.appendChild(s);
 s.appendChild(g);
 document.addEventListener('click', function(e) {
   c++;
-  g.getElementById("clicks").value = c;
+  document.getElementById("clicks").value = c;
 }, false);
