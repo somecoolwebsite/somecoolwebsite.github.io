@@ -23,6 +23,7 @@ document.addEventListener('click', function(e) {
   var currentTop = Math.floor(Math.random() * documentHeight) + 1;
   var currentLeft = Math.floor(Math.random() * documentWidth) + 1;
   epic.push(document.createElement("div"));
+  epic[epic.length-1].style.position = "absolute";
   epic[epic.length-1].style.top = currentTop + "px";
   epic[epic.length-1].style.left = currentLeft + "px";
   epic[epic.length-1].innerHTML = "<p>hell on earth</p>";
