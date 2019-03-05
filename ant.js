@@ -18,4 +18,5 @@ document.body.appendChild(nest);
 document.addEventListener("click", function(){
   ants.push(document.createElement('p'));
   ants[ants.length-1].outerHTML = "<p>🐜</p>";
+  document.body.appendChild(ants[ants.length-1]);
 });
