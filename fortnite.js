@@ -1,1 +1,1 @@
-document.body.innerHTML = "<iframe src=\"https://youtu.be/1BjVUbH7boQ\" style=\"border:0px #ffffff none;\" name=\"myiFrame\" scrolling=\"no\" frameborder=\"1\" marginheight=\"0px\" marginwidth=\"0px\" height=\"400px\" width=\"600px\" allowfullscreen></iframe>";
+document.body.innerHTML = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/AqpYHdv3S00\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
