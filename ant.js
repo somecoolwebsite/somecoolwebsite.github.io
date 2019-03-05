@@ -15,7 +15,7 @@ nest.style.top = currentTop + "px";
 nest.style.left = currentLeft + "px";
 nest.style.zIndex = 2;
 document.body.appendChild(nest);
-document.addEventListner('click', function(e) {
+document.addEventListener("click", function(){
   ants.push(document.createElement('p'));
   ants[ants.length-1].outerHTML = "<p>🐜</p>";
-}, false);
+});
