@@ -16,6 +16,7 @@ var g = document.createElement("div");
 g.style.position = "absolute";
 g.style.top = 8 + "px";
 g.style.right = 16 + "px";
+g.style.zIndex = 2;
 g.id='gmaerrrrrrrrrr';
 g.innerHTML="<p>click</p><p id=\"clicks\"></p>"
 s.type='text/css';
