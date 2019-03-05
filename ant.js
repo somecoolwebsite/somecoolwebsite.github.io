@@ -16,7 +16,12 @@ nest.style.left = currentLeft + "px";
 nest.style.zIndex = 2;
 document.body.appendChild(nest);
 document.addEventListener("click", function(){
+  currentTop = Math.floor(Math.random() * documentHeight) + 1;
+  currentLeft = Math.floor(Math.random() * documentWidth) + 1;
   ants.push(document.createElement('p'));
   ants[ants.length-1].innerHTML = "<p>🐜</p>";
+  ants[ants.length-1].position = "absolute";
+  ants[ants.length-1].top = currentTop + "px";
+  ants[ants.length-1].top = currentLeft + "px";
   document.body.appendChild(ants[ants.length-1]);
 });
