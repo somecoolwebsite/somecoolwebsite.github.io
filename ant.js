@@ -20,8 +20,8 @@ document.addEventListener("click", function(){
   currentLeft = Math.floor(Math.random() * documentWidth) + 1;
   ants.push(document.createElement('p'));
   ants[ants.length-1].innerHTML = "<p>🐜</p>";
-  ants[ants.length-1].position = "absolute";
-  ants[ants.length-1].top = currentTop + "px";
-  ants[ants.length-1].top = currentLeft + "px";
+  ants[ants.length-1].style.position = "absolute";
+  ants[ants.length-1].style.top = currentTop + "px";
+  ants[ants.length-1].style.top = currentLeft + "px";
   document.body.appendChild(ants[ants.length-1]);
 });
