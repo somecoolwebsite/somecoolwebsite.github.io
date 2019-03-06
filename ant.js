@@ -22,6 +22,6 @@ document.addEventListener("click", function(){
   ants[ants.length-1].innerHTML = "<p>🐜</p>";
   ants[ants.length-1].style.position = "absolute";
   ants[ants.length-1].style.top = currentTop + "px";
-  ants[ants.length-1].style.top = currentLeft + "px";
+  ants[ants.length-1].style.left = currentLeft + "px";
   document.body.appendChild(ants[ants.length-1]);
 });
