@@ -19,7 +19,8 @@
 			function game(){
 				var gamer=get("theurl");
 				var rndok = makeid();
-				gamer = gamer.concat(rndok);
+				gamer = gamer.concat("/?q="+rndok);
+				console.log(gamer);
 				httpGet(gamer);
 			}
 			function makeid() {
@@ -32,7 +33,7 @@
   			return text;
 			}
 
-console.log(makeid());
+
     </script>
   </head>
   <body>
