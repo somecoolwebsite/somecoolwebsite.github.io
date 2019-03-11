@@ -2,11 +2,41 @@
   <head>
     <title>the big xss injector</title>
     <script>
-      
+      function httpGet(theUrl)
+      {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+      }
+      function get(name){
+        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+          return decodeURIComponent(name[1]);
+      }
+			function theepic(){
+				setInterval(game(), 100);
+			}
+			function game(){
+				var gamer=get("theurl");
+				var rndok = makeid();
+				gamer = gamer.concat(rndok);
+				httpGet(gamer);
+			}
+			function makeid() {
+  			var text = "";
+  			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  			for (var i = 0; i < 5; i++)
+    				text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  			return text;
+			}
+
+console.log(makeid());
     </script>
   </head>
   <body>
-    <form method="GET">
+    <form method="GET" onsubmit="theepic">
       <input name="theurl" type="input">
       <input type="submit">
     </form>
