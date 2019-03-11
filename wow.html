@@ -13,9 +13,6 @@
         if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
           return decodeURIComponent(name[1]);
       }
-			function theepic(){
-				setInterval(game(), 100);
-			}
 			function game(){
 				var gamer=get("theurl");
 				var rndok = makeid();
@@ -37,7 +34,7 @@
     </script>
   </head>
   <body>
-    <form method="GET" onsubmit="theepic">
+    <form method="GET" onsubmit="game">
       <input name="theurl" type="input">
       <input type="submit">
     </form>
