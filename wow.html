@@ -29,12 +29,13 @@
 
   			return text;
 			}
-
-
+			$("#ger").submit(function(e) {
+    		e.preventDefault();
+			});
     </script>
   </head>
   <body>
-    <form method="GET" onsubmit="game()">
+    <form id="ger" method="GET" onsubmit="game()">
       <input name="theurl" type="input">
       <input type="submit">
     </form>
