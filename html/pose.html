@@ -6,15 +6,19 @@
     <script src="https://unpkg.com/@tensorflow-models/posenet">
     </script>
     <img src="person.jpg" id="person"/>
+    <canvas id="cancer"></canvas>
     <script type="text/javascript">
+      const c = document.getElementById("cancer");
+      var ctx = c.getContext("2d");
+      const imageElement = document.getElementById('person');
+      ctx.drawImage(imageElement);
       posenet.load().then(function(net) {
         const scaleFactor = 1;
         const flipHorizontal = false;
         const outputStride = 16;
-        const imageElement = document.getElementById('person');
         // load the posenet model
         const pose = net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
-        console.table(pose);
+        console.log(pose);
       });
     </script>
   </body>
