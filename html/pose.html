@@ -7,14 +7,14 @@
     </script>
     <img src="person.jpg" id="person"/>
     <script type="text/javascript">
-        const scaleFactor= 1;
-        const imageScaleFactor = 0.50;
+      posenet.load().then(function(net) {
+        const scaleFactor = 1;
         const flipHorizontal = false;
         const outputStride = 16;
         const imageElement = document.getElementById('person');
         // load the posenet model
-        const net = await posenet.load();
         const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
+      });
     </script>
   </body>
 </html>
