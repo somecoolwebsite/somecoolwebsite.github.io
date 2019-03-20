@@ -13,7 +13,7 @@
         const outputStride = 16;
         const imageElement = document.getElementById('person');
         // load the posenet model
-        const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
+        const pose = net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
       });
     </script>
   </body>
