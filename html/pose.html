@@ -20,6 +20,10 @@
         const pose = net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
         console.log(pose);
       });
+      posenet.on('pose', function(results) {
+        poses = results;
+        console.log(results);
+      });
     </script>
   </body>
 </html>
