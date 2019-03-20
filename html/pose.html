@@ -11,7 +11,7 @@
       const c = document.getElementById("cancer");
       var ctx = c.getContext("2d");
       const imageElement = document.getElementById('person');
-      ctx.drawImage(imageElement);
+      ctx.drawImage(imageElement,10,10);
       posenet.load().then(function(net) {
         const scaleFactor = 1;
         const flipHorizontal = false;
