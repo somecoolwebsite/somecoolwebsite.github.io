@@ -8,6 +8,7 @@ function setup() {
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
+	imageMode(CENTER);
 	img = loadImage('cry.jpg');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
