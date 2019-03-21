@@ -8,7 +8,7 @@ function setup() {
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
-	imageMode(CENTER);
+	
 	img = loadImage('cry.jpg');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
@@ -23,6 +23,7 @@ function modelReady() {
 }
 
 function draw() {
+	imageMode(CORNER);
 	image(video, 0, 0, width, height);
 
 	//draw the spooky scary skelertons that send shivers down ur spine
@@ -36,6 +37,7 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
+				imageMode(CENTER);
 				image(img, keypoint.position.x, keypoint.position.y, 100, 100);
 			}
 		}
