@@ -9,7 +9,7 @@ function setup() {
 	video = createCapture(VIDEO);
 	video.size(width, height);
 	
-	img = loadImage('cry.jpg');
+	img = loadImage('okkk.png');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
 	//does some detection stuff
