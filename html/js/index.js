@@ -1,137 +1,64 @@
-let recognizer;
+let video;
+	let poseNet;
+	let poses = [];
+	let skeletons = [];
 
-function predictWord() {
- // Array of words that the recognizer is trained to recognize.
- const words = recognizer.wordLabels();
- recognizer.listen(({scores}) => {
-   // Turn scores into a list of (score,word) pairs.
-   scores = Array.from(scores).map((s, i) => ({score: s, word: words[i]}));
-   // Find the most probable word.
-   scores.sort((s1, s2) => s2.score - s1.score);
-   document.querySelector('#console').textContent = scores[0].word;
- }, {probabilityThreshold: 0.75});
-}
+	function setup() {
+		createCanvas(640, 480);
+		video = createCapture(VIDEO);
+		video.size(width, height);
 
-async function moveSlider(labelTensor) {
- const label = (await labelTensor.data())[0];
- document.getElementById('console').textContent = label;
- if (label == 2) {
-   return;
- }
- let delta = 0.1;
- const prevValue = +document.getElementById('output').value;
- document.getElementById('output').value =
-     prevValue + (label === 0 ? -delta : delta);
-}
+		// Create a new poseNet method with a single detection
+		poseNet = ml5.poseNet(video, modelReady);
+		// This sets up an event that fills the global variable "poses"
+		// with an array every time new poses are detected
+		poseNet.on('pose', function (results) {
+			poses = results;
+		});
+		// Hide the video element, and just show the canvas
+		video.hide();
+	}
 
-function listen() {
- if (recognizer.isListening()) {
-   recognizer.stopListening();
-   toggleButtons(true);
-   document.getElementById('listen').textContent = 'Listen';
-   return;
- }
- toggleButtons(false);
- document.getElementById('listen').textContent = 'Stop';
- document.getElementById('listen').disabled = false;
+	function modelReady() {
+		select('#status').html('Model Loaded');
+	}
 
- recognizer.listen(async ({spectrogram: {frameSize, data}}) => {
-   const vals = normalize(data.subarray(-frameSize * NUM_FRAMES));
-   const input = tf.tensor(vals, [1, ...INPUT_SHAPE]);
-   const probs = model.predict(input);
-   const predLabel = probs.argMax(1);
-   await moveSlider(predLabel);
-   tf.dispose([input, probs, predLabel]);
- }, {
-   overlapFactor: 0.999,
-   includeSpectrogram: true,
-   invokeCallbackOnNoiseAndUnknown: true
- });
-}
+	function draw() {
+		image(video, 0, 0, width, height);
 
-const INPUT_SHAPE = [NUM_FRAMES, 232, 1];
-let model;
+		// We can call both functions to draw all keypoints and the skeletons
+		drawKeypoints();
+		drawSkeleton();
+	}
 
-async function train() {
- toggleButtons(false);
- const ys = tf.oneHot(examples.map(e => e.label), 3);
- const xsShape = [examples.length, ...INPUT_SHAPE];
- const xs = tf.tensor(flatten(examples.map(e => e.vals)), xsShape);
+	// A function to draw ellipses over the detected keypoints
+	function drawKeypoints()  {
+		// Loop through all the poses detected
+		for (let i = 0; i < poses.length; i++) {
+			// For each pose detected, loop through all the keypoints
+			for (let j = 0; j < poses[i].pose.keypoints.length; j++) {
+				// A keypoint is an object describing a body part (like rightArm or leftShoulder)
+				let keypoint = poses[i].pose.keypoints[j];
+				// Only draw an ellipse is the pose probability is bigger than 0.2
+				if (keypoint.score > 0.2) {
+					fill(255, 0, 0);
+					noStroke();
+					ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
+				}
+			}
+		}
+	}
 
- await model.fit(xs, ys, {
-   batchSize: 16,
-   epochs: 10,
-   callbacks: {
-     onEpochEnd: (epoch, logs) => {
-       document.querySelector('#console').textContent =
-           `Accuracy: ${(logs.acc * 100).toFixed(1)}% Epoch: ${epoch + 1}`;
-     }
-   }
- });
- tf.dispose([xs, ys]);
- toggleButtons(true);
-}
-
-function buildModel() {
- model = tf.sequential();
- model.add(tf.layers.depthwiseConv2d({
-   depthMultiplier: 8,
-   kernelSize: [NUM_FRAMES, 3],
-   activation: 'relu',
-   inputShape: INPUT_SHAPE
- }));
- model.add(tf.layers.maxPooling2d({poolSize: [1, 2], strides: [2, 2]}));
- model.add(tf.layers.flatten());
- model.add(tf.layers.dense({units: 3, activation: 'softmax'}));
- const optimizer = tf.train.adam(0.01);
- model.compile({
-   optimizer,
-   loss: 'categoricalCrossentropy',
-   metrics: ['accuracy']
- });
-}
-
-function toggleButtons(enable) {
- document.querySelectorAll('button').forEach(b => b.disabled = !enable);
-}
-
-function flatten(tensors) {
- const size = tensors[0].length;
- const result = new Float32Array(tensors.length * size);
- tensors.forEach((arr, i) => result.set(arr, i * size));
- return result;
-}
-
-// One frame is ~23ms of audio.
-const NUM_FRAMES = 3;
-let examples = [];
-
-function collect(label) {
- if (label == null) {
-   return recognizer.stopListening();
- }
- recognizer.listen(async ({spectrogram: {frameSize, data}}) => {
-   let vals = normalize(data.subarray(-frameSize * NUM_FRAMES));
-   examples.push({vals, label});
-   document.querySelector('#console').textContent =
-       `${examples.length} examples collected`;
- }, {
-   overlapFactor: 0.999,
-   includeSpectrogram: true,
-   invokeCallbackOnNoiseAndUnknown: true
- });
-}
-
-function normalize(x) {
- const mean = -100;
- const std = 10;
- return x.map(x => (x - mean) / std);
-}
-
-async function app() {
- recognizer = speechCommands.create('BROWSER_FFT');
- await recognizer.ensureModelLoaded();
- buildModel();
-}
-
-app();
+	// A function to draw the skeletons
+	function drawSkeleton() {
+		// Loop through all the skeletons detected
+		for (let i = 0; i < poses.length; i++) {
+			// For every skeleton, loop through all body connections
+			for (let j = 0; j < poses[i].skeleton.length; j++) {
+				let partA = poses[i].skeleton[j][0];
+				let partB = poses[i].skeleton[j][1];
+				stroke(255, 0, 0);
+				line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
+			}
+		}
+	}
