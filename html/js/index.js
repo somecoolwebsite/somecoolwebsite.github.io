@@ -2,13 +2,13 @@ let video;
 let poseNet;
 let poses = [];
 let skeletons = [];
-var cry = document.getElementById("cry");
+let img;
 
 function setup() {
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
-	
+	img = loadImage('cry.jpg');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
 	//does some detection stuff
@@ -35,7 +35,7 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
-				image(cry, 0, 0, 10, 10);
+				image(img, 0, 0, 10, 10);
 			}
 		}
 	}
