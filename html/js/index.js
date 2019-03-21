@@ -15,8 +15,6 @@ let video;
 		poseNet.on('pose', function (results) {
 			poses = results;
 		});
-		// Hide the video element, and just show the canvas
-		video.hide();
 	}
 
 	function modelReady() {
