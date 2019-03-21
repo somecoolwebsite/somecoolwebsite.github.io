@@ -2,6 +2,7 @@ let video;
 let poseNet;
 let poses = [];
 let skeletons = [];
+var cry = document.getElementById("cry");
 
 function setup() {
 	createCanvas(640, 480);
@@ -34,9 +35,7 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
-				fill(255, 0, 0);
-				noStroke();
-				ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
+				image(cry, 0, 0, 10, 10);
 			}
 		}
 	}
