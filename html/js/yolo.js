@@ -13,6 +13,7 @@ function setup() {
   // Hide the original video
   video.hide();
   status = select('#status');
+  detect();
 }
 
 function draw() {
