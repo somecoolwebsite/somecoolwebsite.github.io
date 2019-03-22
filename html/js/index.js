@@ -26,9 +26,11 @@ function modelReady() {
 function draw() {
 	rect(0, 0, width, height);
 	if(jp===false){
+		scale(-1.0,1.0);
 		imageMode(CORNER);
 		image(video, 0, 0, width, height);
 	}
+	else{scale(1.0,1.0);}
 	//draw the spooky scary skelertons that send shivers down ur spine
 	drawKeypoints();
 	drawSkeleton();
