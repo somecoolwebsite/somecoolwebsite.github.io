@@ -24,6 +24,7 @@ function modelReady() {
 }
 
 function draw() {
+	rect(0, 0, width, height);
 	if(jp===false){
 		imageMode(CORNER);
 		image(video, 0, 0, width, height);
