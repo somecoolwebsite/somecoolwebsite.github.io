@@ -3,6 +3,7 @@ let poseNet;
 let poses = [];
 let skeletons = [];
 let img;
+var jp = false;
 
 function setup() {
 	createCanvas(640, 480);
@@ -23,9 +24,10 @@ function modelReady() {
 }
 
 function draw() {
-	imageMode(CORNER);
-	image(video, 0, 0, width, height);
-
+	if(jp===false){
+		imageMode(CORNER);
+		image(video, 0, 0, width, height);
+	}
 	//draw the spooky scary skelertons that send shivers down ur spine
 	drawKeypoints();
 	drawSkeleton();
