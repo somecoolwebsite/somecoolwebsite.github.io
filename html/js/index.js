@@ -27,7 +27,7 @@ function draw() {
 	rect(0, 0, width, height);
 	if(jp===false){
 		imageMode(CORNER);
-		image(video, width, 0, width, height);
+		image(video, 0, 0, width, height);
 	}
 	//draw the spooky scary skelertons that send shivers down ur spine
 	drawKeypoints();
