@@ -1,35 +1,38 @@
-// Initialize the Image Classifier method with MobileNet. A callback needs to be passed.
-const classifier = ml5.imageClassifier('MobileNet', modelReady);
+let mobilenet;
+let video;
+let label = '';
 
-// A variable to hold the image we want to classify
-let img;
+function modelReady() {
+  console.log('Model is ready!!!');
+  mobilenet.predict(gotResults);
+}
+
+function gotResults(error, results) {
+  if (error) {
+    console.error(error);
+  } else {
+    //console.log(results);
+    label = results[0].className;
+    mobilenet.predict(gotResults);
+  }
+}
+
+// function imageReady() {
+//   image(puffin, 0, 0, width, height);
+// }
 
 function setup() {
-  noCanvas();
-  // Load the image
-  img = createImg('person.jpg', imageReady);
-  img.size(400, 400);
+  createCanvas(640, 550);
+  video = createCapture(VIDEO);
+  video.hide();
+  background(0);
+  mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
 }
 
-// Change the status when the model loads.
-function modelReady(){
-  document.getElementById('status').html('Model Loaded')
-}
-
-// When the image has been loaded,
-// get a prediction for that image
-function imageReady() {
-  classifier.predict(img, gotResult);
-  // You can also specify the amount of classes you want
-  // classifier.predict(img, 10, gotResult);
-}
-
-// A function to run when we get any errors and the results
-function gotResult(err, results) {
-  if (err) {
-    console.error(err);
-  }
-  // The results are in an array ordered by probability.
-  select('#result').html(results[0].className);
-  select('#probability').html(nf(results[0].probability, 0, 2));
+function draw() {
+  background(0);
+  image(video, 0, 0);
+  fill(255);
+  textSize(32);
+  text(label, 10, height - 20);
 }
