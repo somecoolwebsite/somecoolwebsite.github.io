@@ -135,7 +135,6 @@ class NeuralNetwork {
 
     outputs.print();
     targets.print();
-    error.print();
   }
 
   serialize() {
