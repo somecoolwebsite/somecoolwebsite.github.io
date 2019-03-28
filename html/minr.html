@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+      let p = new gameObject(200, 300, 10, 10, "p");
+      let m;
+      let bl = [];
+
+      function setup() {
+        createCanvas(400, 400);
+        m = new gameObject(mouseX,mouseY,10, 10,"");
+        for (i = 0; i < 50; i++) {
+          bl.push(new gameObject(i * 10,height-10, 10, 10));
+          bl.push(new gameObject(i * 10,height-20, 10, 10));
+          bl.push(new gameObject(i * 10,height-30, 10, 10));
+          bl.push(new gameObject(i * 20,height-40, 10, 10));
+        }
+      }
+
+      function gameObject(x, y, width, height, type) {
+        this.x = x;
+        this.y = y;
+        this.acc = 0;
+        this.type = type;
+        this.width = width;
+        this.height = height;
+        this.update = function() {
+          push();
+          translate(this.x, this.y);
+          if(this.type==='p'){
+            fill('red');
+          }
+          else{
+            fill('black');
+          }
+          rect(0, 0, this.width, this.height);
+          pop();
+          if (this.type === "p") {
+            for(i=0;i<10;i++){
+              this.y += this.acc-0.3;
+              this.force();
+            }
+            this.acc += 0.4;
+          }
+        }
+        this.collision = function(o) {
+          var myleft = this.x;
+          var myright = this.x + (this.width);
+          var mytop = this.y;
+          var mybottom = this.y + (this.height);
+          var hit = true;
+          if ((mybottom < o.y) || (mytop > o.y) || (myright < o.x) || (myleft > o.x)) {
+            hit = false;
+          }
+          return hit;
+        }
+        this.force = function(){
+          for(i=0;i<bl.length;i++){
+            if(this.collision(bl[i])){
+              if(this.acc>=0){
+                this.acc=0;
+              }
+            }
+          }
+        }
+      }
+
+      function draw() {
+        background(220);
+        if (keyIsDown(LEFT_ARROW)) {
+          p.x -= 3;
+        }
+        if (keyIsDown(RIGHT_ARROW)) {
+          p.x += 3;
+        }
+        if (keyIsDown(UP_ARROW)) {
+          p.acc=-3;
+        }
+        p.force();
+        p.update();
+        m.x = mouseX;
+        m.y = mouseY;
+        m.update();
+
+        //===========================
+
+        for (i = 0; i < bl.length; i++) {
+          bl[i].update();
+          if(m.collision(bl[i])&&mouseIsPressed&&(mouseButton == RIGHT)){
+            bl.splice(i,1);
+          }
+          else if(mouseIsPressed&&(mouseButton == LEFT)){
+            bl.push(new gameObject(mouseX,mouseY, 10, 10)); 
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
