@@ -12,6 +12,7 @@
     <script>
       let p = new gameObject(200, 300, 10, 10, "p");
       let m;
+      let inv = 0;
       let bl = [];
 
       document.body.style = "margin:0px;";
@@ -102,12 +103,16 @@
 
         //===========================
         if(mouseIsPressed&&(mouseButton == RIGHT)){
-          bl.push(new gameObject(mouseX,mouseY, 10, 10, "b"));
+          if(inv>=1){
+            bl.push(new gameObject(mouseX,mouseY, 10, 10, "b"));
+            inv--;
+          }
         }
         for (i = 0; i < bl.length; i++) {
           bl[i].update();
           if(m.collision(bl[i])&&mouseIsPressed&&(mouseButton == LEFT)){
             bl.splice(i,1);
+            inv++;
           }
 
         }
