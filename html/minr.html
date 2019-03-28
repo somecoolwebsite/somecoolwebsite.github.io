@@ -10,11 +10,10 @@
   </head>
   <body>
     <script>
-      document.addEventListener('contextmenu', event => event.preventDefault());
       let p = new gameObject(200, 300, 10, 10, "p");
       let m;
       let bl = [];
-
+      document.addEventListener('contextmenu', event => event.preventDefault());
       function setup() {
         createCanvas(400, 400);
         m = new gameObject(mouseX,mouseY,10, 10,"");
@@ -68,6 +67,9 @@
             if(this.collision(bl[i])){
               if(this.acc>=0){
                 this.acc=0;
+              }
+              if(this.y+this.height>=bl[i].y){
+                 this.y--;
               }
             }
           }
