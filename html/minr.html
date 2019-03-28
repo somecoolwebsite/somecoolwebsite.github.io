@@ -13,15 +13,18 @@
       let p = new gameObject(200, 300, 10, 10, "p");
       let m;
       let bl = [];
+
+      document.body.style = "";
+
       document.addEventListener('contextmenu', event => event.preventDefault());
       function setup() {
-        createCanvas(400, 400);
+        createCanvas(window.innerWidth, window.innerHeight);
         m = new gameObject(mouseX,mouseY,10, 10,"");
-        for (i = 0; i < 50; i++) {
-          bl.push(new gameObject(i * 10,height-10, 10, 10));
-          bl.push(new gameObject(i * 10,height-20, 10, 10));
-          bl.push(new gameObject(i * 10,height-30, 10, 10));
-          bl.push(new gameObject(i * 20,height-40, 10, 10));
+        for (i = 0; i < window.innerWidth/10; i++) {
+          bl.push(new gameObject(i * 10,height-10, 10, 10, "b"));
+          bl.push(new gameObject(i * 10,height-20, 10, 10, "b"));
+          bl.push(new gameObject(i * 10,height-30, 10, 10, "b"));
+          bl.push(new gameObject(i * 20,height-40, 10, 10, "b"));
         }
       }
 
@@ -37,6 +40,10 @@
           translate(this.x, this.y);
           if(this.type==='p'){
             fill('red');
+          }
+          else if(this.type==="b"){
+            stroke('green');
+            fill('brown');
           }
           else{
             fill('black');
@@ -78,13 +85,13 @@
 
       function draw() {
         background(220);
-        if (keyIsDown(LEFT_ARROW)) {
+        if (keyIsDown(65)) {
           p.x -= 3;
         }
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (keyIsDown(68)) {
           p.x += 3;
         }
-        if (keyIsDown(UP_ARROW)) {
+        if (keyIsDown(87)) {
           p.acc=-3;
         }
         p.force();
@@ -95,7 +102,7 @@
 
         //===========================
         if(mouseIsPressed&&(mouseButton == RIGHT)){
-          bl.push(new gameObject(mouseX,mouseY, 10, 10));
+          bl.push(new gameObject(mouseX,mouseY, 10, 10, "b"));
         }
         for (i = 0; i < bl.length; i++) {
           bl[i].update();
