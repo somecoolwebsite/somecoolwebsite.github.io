@@ -14,11 +14,11 @@
       let m;
       let bl = [];
 
-      document.body.style = "";
+      document.body.style = "margin:0px;";
 
       document.addEventListener('contextmenu', event => event.preventDefault());
       function setup() {
-        createCanvas(window.innerWidth, window.innerHeight);
+        createCanvas(window.innerWidth-10, window.innerHeight-10);
         m = new gameObject(mouseX,mouseY,10, 10,"");
         for (i = 0; i < window.innerWidth/10; i++) {
           bl.push(new gameObject(i * 10,height-10, 10, 10, "b"));
