@@ -65,7 +65,7 @@
           var mytop = this.y;
           var mybottom = this.y + (this.height);
           var hit = true;
-          if ((mybottom < o.y) || (mytop > o.y) || (myright < o.x) || (myleft > o.x)) {
+          if ((mybottom < o.y) || (mytop > (o.y+o.height)) || (myright < o.x) || (myleft > (o.x+o.width))) {
             hit = false;
           }
           return hit;
@@ -100,7 +100,7 @@
         m.x = mouseX;
         m.y = mouseY;
         m.update();
-
+        text(inv,10,10);
         //===========================
         if(mouseIsPressed&&(mouseButton == RIGHT)){
           if(inv>=1){
