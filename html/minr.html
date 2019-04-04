@@ -12,9 +12,11 @@
     <script>
       let p = new gameObject(200, 300, 10, 10, "p");
       let m;
-      let inv = [0, 10];
+      let inv = [0, 0, 0];
       let bl = [];
       var cs = 0;
+      var build = false;
+
 
       /*
       ==========================
@@ -38,7 +40,7 @@
 
       document.addEventListener('contextmenu', event => event.preventDefault());
       function setup() {
-        createCanvas(window.innerWidth-10, window.innerHeight-10);
+        createCanvas(750, 600);
         m = new gameObject(mouseX,mouseY,10, 10,"");
         for (i = 0; i < window.innerWidth/10; i++) {
           bl.push(new gameObject(i * 10,height-10, 10, 10, 0));
@@ -63,6 +65,10 @@
           }
           else if(this.type===0){
             stroke('green');
+            fill('brown');
+          }
+          else if(this.type===2){
+            stroke('red');
             fill('brown');
           }
           else{
@@ -122,6 +128,16 @@
 
         //===========================
         //UI
+        build=true;
+        if(build){
+          for(var i=0;i<bl.length;i++){
+           if(dist(bl[i].x,bl[i].y,p.x,p.y)<=30&&bl[i].type===2){
+
+             rect(100,100,400,400);
+             inv[1]++;
+           }
+          }
+        }
 
         for(var i=0;i<inv.length;i++){
           text(inv[i],i*50 + 30,30);
