@@ -134,7 +134,7 @@ class NeuralNetwork {
     this.bias_h.add(hidden_gradient);
 
     outputs.print();
-    targets.print();
+    //targets.print();
   }
 
   serialize() {
