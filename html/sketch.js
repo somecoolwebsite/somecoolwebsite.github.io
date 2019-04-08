@@ -8,131 +8,131 @@ let s;
 let training_data = [{
   //there is 30 possible cardsss
     inputs: [0,0,0,0,0,0,0],
-    outputs: [0]
+    outputs: [3,4,5]
   },
   {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [1]
+    outputs: [3,4,5]
   },
   {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [2]
+    outputs: [3,4,5]
   },
   {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },
                      {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },
                      {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },
                      {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },
                      {
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },{
     inputs: [0,0,0,0,0,0,0],
-    outputs: [3]
+    outputs: [3,4,5]
   },
 ];
 
