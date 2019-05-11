@@ -1,0 +1,21 @@
+<html>
+    <head><title>A Chatting Application!!!!!!</title></head>
+    <body>
+        <div id="content"></div>
+        <button onclick="send()">Uwufy</button>
+        <input type="text" id="txtt" placeholder="enter you message!">
+        <script>
+            
+
+            document.onkeypress = function(e){if(e.keyCode===13){send();}};
+
+            function send(){
+                var txt = document.getElementById("txtt").value;
+                var randtxt = "https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg=";
+                var uw = txt.replace("l","w");
+                uw = uw.replace("L","W");
+                document.getElementById("txtt").value = uw;
+            }
+        </script>
+    </body>
+</html>
