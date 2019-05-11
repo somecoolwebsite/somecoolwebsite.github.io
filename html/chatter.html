@@ -1,0 +1,25 @@
+<html>
+    <head><title>A Chatting Application!!!!!!</title></head>
+    <body>
+        <div id="content"></div>
+        <button onclick="updateContent()">Send</button>
+        <input type="text" id="txtt" placeholder="enter you message!">
+        <script>
+            function httpGet(theUrl)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                xmlHttp.send( null );
+                return xmlHttp.responseText;
+            }
+            function updateContent(){
+                document.getElementById("content").innerHTML = httpGet("https://sleepy-falls-61435.herokuapp.com/msg.html");
+            }
+            function send(){
+                var txt = document.getElementById("txtt").value;
+                var randtxt = httpGet("https://sleepy-falls-61435.herokuapp.com/update?msg="+txt);
+                updateContent();
+            }
+        </script>
+    </body>
+</html>
