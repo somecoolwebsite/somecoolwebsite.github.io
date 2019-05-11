@@ -21,6 +21,7 @@
                 var txt = document.getElementById("txtt").value;
                 var randtxt = httpGet("https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg="+txt);
                 updateContent();
+                document.getElementById("txtt").value = "";
             }
         </script>
     </body>
