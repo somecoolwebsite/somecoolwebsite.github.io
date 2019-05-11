@@ -13,13 +13,13 @@
                 return xmlHttp.responseText;
             }
             function updateContent(){
-                document.getElementById("content").innerHTML = httpGet("https://tranquil-meadow-40212.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/msg.html");
+                document.getElementById("content").innerHTML = httpGet("https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/msg.html");
             }
             document.onkeypress = function(e){if(e.keyCode===13){send();}}
             setInterval(function(){ updateContent()}, 3000);
             function send(){
                 var txt = document.getElementById("txtt").value;
-                var randtxt = httpGet("https://tranquil-meadow-40212.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg="+txt);
+                var randtxt = httpGet("https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg="+txt);
                 updateContent();
                 document.getElementById("txtt").value = "";
             }
