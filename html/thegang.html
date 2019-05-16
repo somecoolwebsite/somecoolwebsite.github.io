@@ -20,7 +20,7 @@
     <br>
     <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want">
     <br>
-    <button onclick="send();">Send</button>
+    <button onclick="send();">Send Snippit</button>
     <br>
     <p>javascript compilers give me brain pain! especially ===</p>
     <hr>
@@ -29,7 +29,7 @@
     <script>
       
       function receive(){
-        document.getElementById("display").innerHTML=fetch('http://some-site.com/cors-enabled/some.json', {mode: 'cors'}) .then(function(response) { return response.text(); }) .then(function(text) { console.log('Request successful', text); }) .catch(function(error) { log('Request failed', error) });
+        document.getElementById("display").innerHTML=fetch('https://thegang--locknessko.repl.co/messages', {mode: 'cors'}) .then(function(response) { return response.text(); }) .then(function(text) { console.log('Request successful', text); }) .catch(function(error) { log('Request failed', error) });
       }
       setInterval(recieve(), 3000);
       function send(){
