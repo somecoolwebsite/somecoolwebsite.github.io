@@ -20,7 +20,7 @@
     <br>
     <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want">
     <br>
-    <button onclick="send();">Send Snippet</button>
+    <button onclick="send();">Send</button>
     <br>
     <p>there was a lot of brain pain involve in making this! hecldxkvdfjkhgdf</p>
     <hr>
@@ -29,21 +29,17 @@
     <script>
       receive();
       
+      function httpGet(theUrl)
+      {
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.withCredentials = true;
+          xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+          xmlHttp.send( null );
+          return xmlHttp.responseText;
+      }
       
       function receive(){
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://thegang--locknessko.repl.co/messages")
-        xhr.withCredentials = true;
-        try {
-        xhr.send();
-        if (xhr.status != 200) {
-          alert(`Error ${xhr.status}: ${xhr.statusText}`);
-        } else {
-          document.getElementById("display").innerHTML = xhr.response;
-        }
-        } catch(err) { // instead of onerror
-          alert("Request failed");
-        };
+        document.getElementById("display").innerHTML = httpGet("https://thegang--locknessko.repl.co/messages");
       }
       setInterval(receive(), 3000);
       function send(){
