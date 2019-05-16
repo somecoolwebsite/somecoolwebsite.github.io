@@ -48,7 +48,9 @@
       function receive(){
         document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages");
       }
-      setInterval(receive(), 3000);
+      window.onload = function(){
+      setInterval(function(){ document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages");}, 3000);
+      }
       function send(){
        fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
       }
