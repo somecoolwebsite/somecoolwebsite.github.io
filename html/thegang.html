@@ -20,7 +20,7 @@
     <br>
     <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want">
     <br>
-    <button onclick="send();">Send Snippit</button>
+    <button onclick="send();">Send Snippet</button>
     <br>
     <p>there was a lot of brain pain involve in making this! hecldxkvdfjkhgdf</p>
     <hr>
@@ -29,7 +29,7 @@
     <script>
       receive();
       function receive(){
-        document.getElementById("display").innerHTML=(await (await fetch('https://thegang--locknessko.repl.co/messages')).text());
+        document.getElementById("display").innerHTML=fetch('https://thegang--locknessko.repl.co/messages').text();
       }
       setInterval(receive(), 3000);
       function send(){
