@@ -39,8 +39,7 @@
       
       function httpGet(theUrl)
       {
-          var xmlHttp = new XMLHttpRequest();
-          xmlHttp.withCredentials = true;
+          var xmlHttp = new XDomainRequest();
           xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
           xmlHttp.send( null );
           return xmlHttp.responseText;
