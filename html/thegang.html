@@ -40,14 +40,13 @@
       function httpGet(theUrl)
       {
           var xmlHttp = new XMLHttpRequest();
-	  xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
           xmlHttp.open( "GET", theUrl, false); // false for synchronous request
           xmlHttp.send( null );
           return xmlHttp.responseText;
       }
       
       function receive(){
-        document.getElementById("display").innerHTML = httpGet("https://thegang--locknessko.repl.co/messages");
+        document.getElementById("display").innerHTML = httpGet("https://crossorigin.me/https://thegang--locknessko.repl.co/messages");
       }
       setInterval(receive(), 3000);
       function send(){
