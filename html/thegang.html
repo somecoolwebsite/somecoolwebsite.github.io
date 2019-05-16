@@ -33,7 +33,7 @@
       }
       setInterval(recieve(), 3000);
       function send(){
-       fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content")+"&e="+document.getElementById("name")+"");
+       fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
       }
     </script>
   </body>
