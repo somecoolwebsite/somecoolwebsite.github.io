@@ -49,13 +49,14 @@
       
       function receive(){
         document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");
-      	document.getElementById("content").value = "";
+      	
       }
       window.onload = function(){
-      setInterval(function(){document.getElementById("content").value = ""; document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");}, 3000);
+      setInterval(function(){document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");}, 3000);
       }
       function send(){
        fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
+      	document.getElementById("content").value = "";
       }
     </script>
   </body>
