@@ -31,7 +31,7 @@
       function receive(){
         document.getElementById("display").innerHTML=fetch('http://some-site.com/cors-enabled/some.json', {mode: 'cors'}) .then(function(response) { return response.text(); }) .then(function(text) { console.log('Request successful', text); }) .catch(function(error) { log('Request failed', error) });
       }
-      setInterval(3000, receive());
+      setInterval(recieve(), 3000);
       function send(){
        fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content")+"&e="+document.getElementById("name")+"");
       }
