@@ -29,7 +29,7 @@
     <script>
       receive();
       function receive(){
-        document.getElementById("display").innerHTML=fetch('https://thegang--locknessko.repl.co/messages', {mode: 'cors'}) .then(function(response) { return response.text(); }) .then(function(text) { console.log('Request successful', text); }) .catch(function(error) { log('Request failed', error) });
+        document.getElementById("display").innerHTML=(await (await fetch('https://thegang--locknessko.repl.co/messages')).text());
       }
       setInterval(receive(), 3000);
       function send(){
