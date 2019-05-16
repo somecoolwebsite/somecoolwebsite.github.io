@@ -22,16 +22,16 @@
     <br>
     <button onclick="send();">Send Snippit</button>
     <br>
-    <p>there was a lot of brain pain involve in making this!</p>
+    <p>there was a lot of brain pain involve in making this! hecldxkvdfjkhgdf</p>
     <hr>
     <div id="display">
     </div>
     <script>
-      
+      receive();
       function receive(){
         document.getElementById("display").innerHTML=fetch('https://thegang--locknessko.repl.co/messages', {mode: 'cors'}) .then(function(response) { return response.text(); }) .then(function(text) { console.log('Request successful', text); }) .catch(function(error) { log('Request failed', error) });
       }
-      setInterval(recieve(), 3000);
+      setInterval(receive(), 3000);
       function send(){
        fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
       }
