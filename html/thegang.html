@@ -30,13 +30,15 @@
     <br>
     <button onclick="send();">Send</button>
     <br>
-    <p>there was a lot of brain pain involve in making this! i very dislike CORS</p>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com</p>
     <hr>
     <div id="display">
     </div>
     <script>
       receive();
-      
+      function rep(str, search, replacement) {
+				return str.split(search).join(replacement);
+			}
       function httpGet(theUrl)
       {
           var xmlHttp = new XMLHttpRequest();
@@ -46,10 +48,10 @@
       }
       
       function receive(){
-        document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages");
+        document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");
       }
       window.onload = function(){
-      setInterval(function(){ document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages");}, 3000);
+      setInterval(function(){ document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");}, 3000);
       }
       function send(){
        fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
