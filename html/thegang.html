@@ -30,7 +30,7 @@
     <br>
     <button onclick="send();">Send</button>
     <br>
-    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com</p>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. I need new font</p>
     <hr>
     <div id="display">
     </div>
@@ -46,7 +46,7 @@
           xmlHttp.send( null );
           return xmlHttp.responseText;
       }
-      
+      document.onkeypress = function(e){if(e.keycode===13){send();}};
       function receive(){
         document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");
       	
