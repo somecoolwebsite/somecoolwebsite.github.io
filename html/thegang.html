@@ -26,16 +26,23 @@
     <header><h2>the === gang: for javascript brain pain</h2></header>
     <input type="text" id="name" placeholder="Name">
     <br>
-    <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want">
+    <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want" onkeypress="return runScript(event)">
     <br>
     <button onclick="send();">Send</button>
     <br>
-    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. I need new font</p>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. Now with enter!</p>
     <hr>
     <div id="display">
     </div>
     <script>
       receive();
+			function runScript(e) {
+					//See notes about 'which' and 'key'
+					if (e.keyCode == 13) {
+							send()
+					}
+			}
+			
       function rep(str, search, replacement) {
 				return str.split(search).join(replacement);
 			}
