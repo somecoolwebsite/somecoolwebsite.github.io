@@ -10,7 +10,7 @@
       audio_tag = document.getElementById('youtube');
       function p(){
         var vid = document.getElementById("ytid").value;
-        fetch("https://"+vid+"-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none&url=https%3A%2F%2Fwww.youtube.com%2Fget_video_info%3Fvideo_id%3D" + vid).then(response => {
+        fetch("https%3A%2F%2Fwww.youtube.com%2Fget_video_info%3Fvideo_id%3D" + vid).then(response => {
             if (response.ok) {
                 response.text().then(data => {
 
