@@ -10,7 +10,7 @@
       audio_tag = document.getElementById('youtube');
       function p(){
         var vid = document.getElementById("ytid").value;
-        fetch("https://www.youtube.com/get_video_info?video_id=" + vid).then(response => {
+        fetch("https://bypasscors.herokuapp.com/api/?url=https://www.youtube.com/get_video_info?video_id=" + vid).then(response => {
             if (response.ok) {
                 response.text().then(data => {
 
