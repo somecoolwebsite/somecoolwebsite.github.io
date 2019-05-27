@@ -43,7 +43,7 @@ function runScript(e) {
       }
       document.onkeypress = function(e){if(e.keycode===13){receive();}};
       function receive(){
-        document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://urlidk--locknessko.repl.co/up?upp="+document.getElementById("content").value);
+        document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://urlidk--locknessko.repl.co/up?upp="+document.getElementById("content").value);
       }
     </script>
   </body>
