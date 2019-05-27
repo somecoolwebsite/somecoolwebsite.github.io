@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>url shortener</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+  </head>
+  <body>
+    <header><h2>shorten url</h2></header>
+    <input type="text" id="content" placeholder="https://google.com" onkeypress="return runScript(event)">
+    <br>
+    <button onclick="send();">Send</button>
+    <br>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. Now with enter!</p>
+    <hr>
+    <div id="display">
+    </div>
+    <script>
+      receive();
+			function runScript(e) {
+					//See notes about 'which' and 'key'
+					if (e.keyCode == 13) {
+							receive()
+					}
+			}
+			
+      function rep(str, search, replacement) {
+				return str.split(search).join(replacement);
+			}
+      function httpGet(theUrl)
+      {
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.open( "GET", theUrl, false); // false for synchronous request
+          xmlHttp.send( null );
+          return xmlHttp.responseText;
+      }
+      document.onkeypress = function(e){if(e.keycode===13){receive();}};
+      function receive(){
+        document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://urlidk--locknessko.repl.co/up?upp="+document.getElementById("content").value);
+      }
+    </script>
+  </body>
+</html>
