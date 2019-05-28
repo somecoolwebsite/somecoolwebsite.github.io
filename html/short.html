@@ -18,7 +18,7 @@
     <br>
     <button onclick="receive();">Send</button>
     <br>
-    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. Now with enter!</p>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com or https://cors-anywhere.herokuapp.com/. Now with enter!</p>
     <hr>
     <div id="display">
     </div>
@@ -42,7 +42,7 @@ function runScript(e) {
       }
       document.onkeypress = function(e){if(e.keycode===13){receive();}};
       function receive(){
-        document.getElementById("display").innerHTML = httpGet("https://bypasscors.herokuapp.com/api/?url=https://urlidk--locknessko.repl.co/up?upp="+document.getElementById("content").value);
+        document.getElementById("display").innerHTML = httpGet("https://cors-anywhere.herokuapp.com/https://urlidk--locknessko.repl.co/up?upp="+document.getElementById("content").value);
       }
     </script>
   </body>
