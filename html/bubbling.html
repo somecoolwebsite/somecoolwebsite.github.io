@@ -22,6 +22,7 @@
 
       socket.on('pos', function(data) {
         console.log(data);
+        fill(x,y,0);
         ellipse(data[0], data[1], 30);
       });
 
