@@ -17,6 +17,7 @@
       var socket = io.connect('https://multiplayer-circle--locknessko.repl.co');
 
       function setup() {
+        noStroke();
         createCanvas(window.innerWidth - 20, window.innerHeight - 20);
         var button = createButton("Clear");
         button.mousePressed(clearCanv);
