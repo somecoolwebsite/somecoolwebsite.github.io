@@ -17,7 +17,7 @@
       var socket = io.connect('https://multiplayer-circle--locknessko.repl.co');
 
       function setup() {
-        createCanvas(400, 400);
+        createCanvas(window.innerWidth, window.innerHeight);
       }
 
       socket.on('pos', function(data) {
