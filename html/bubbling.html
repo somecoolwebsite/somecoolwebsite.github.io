@@ -27,10 +27,13 @@
       });
 
       function draw() {
-        fill(x,y,0);
+        fill(x, y, 0);
+      }
+
+      function mouseDragged() {
         ellipse(x, y, 30);
-        x=mouseX;
-        y=mouseY;
+        x = mouseX;
+        y = mouseY;
         socket.emit('pos', [x, y]);
       }
     </script>
