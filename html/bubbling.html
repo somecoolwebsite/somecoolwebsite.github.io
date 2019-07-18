@@ -17,9 +17,13 @@
       var socket = io.connect('https://multiplayer-circle--locknessko.repl.co');
 
       function setup() {
-        createCanvas(window.innerWidth-20, window.innerHeight-20);
+        createCanvas(window.innerWidth - 20, window.innerHeight - 20);
+        var button = createButton("Clear");
+        button.mousePressed(clearCanv);
       }
-
+      function clearCanv(){
+        background(255);
+      }
       socket.on('pos', function(data) {
         console.log(data);
         fill(data[0], data[1], 0);
@@ -27,7 +31,7 @@
       });
 
       function draw() {
-        
+
       }
 
       function mouseDragged() {
