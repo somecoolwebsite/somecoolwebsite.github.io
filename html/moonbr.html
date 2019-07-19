@@ -8,11 +8,30 @@
       var aacc;
 var avel;
 var acc;
-
+var ground;
 var pos;
 var ang = 0;
 
+function land(x,y,w,h){
+  this.x=x;
+  this.y=y;
+  this.w=w;
+  this.h=h;
+  this.render=function(){
+    rect(this.x,this.y,this.w,this.h);
+  }
+}
+
+function c(x,y,w,h,xx,yy,ww,hh){
+  var crash = false;
+  if (dist(x,y,xx,yy)<40) {
+            crash = true;
+        }
+        return crash;
+}
+
 function setup() {
+  ground = new land(200,395,400,10);
   acc = createVector(0, 0);
   vel = createVector(0, 0);
   aacc = createVector(0, 0);
@@ -23,29 +42,33 @@ function setup() {
 }
 
 function render() {
+  fill(190);
+  ground.render();
   fill(255, 0, 0);
-
-
+ 
+  push();
   translate(pos.x, pos.y);
   rotate(ang);
 
   rect(0, 0, 40, 40);
-
+  pop();
+  text(frameRate()+"",10,20);
 }
 
 function tick() {
 
   console.log(frameRate());
-  if (keyIsDown(38) || mouseIsPressed) {
+  if (keyIsDown(38) || mouseIsPressed){
     acc.y -= 0.005;
   } else {
     acc.y += 0.01;
   }
+  if(c(pos.x,pos.y,40,40,ground.x,ground.y)&&acc.y>=0){acc.y=0}
   if (mouseIsPressed && mouseX > 200) {
     ang += 0.01;
   } else if (mouseIsPressed && mouseX < 200) {
     ang -= 0.01;
-  }
+   }
   pos.add(acc);
 }
 
