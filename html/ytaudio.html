@@ -1,57 +1,45 @@
 <html>
-  <head><title>Youtube Audio Player</title></head>
+  <head><title>Moon Battle Royale</title></head>
   <body>
-    <audio id="youtube" autoplay controls loop></audio>
-    <input type="text" id="ytid" placeholder="Enter YT vid ID"></input>
-    <button onclick="p()">Play!</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
     <script>
-      var vid = "",
-      audio_streams = {},
-      audio_tag = document.getElementById('youtube');
-      function p(){
-        var vid = document.getElementById("ytid").value;
-        fetch("https://bypasscors.herokuapp.com/api/?url=https://www.youtube.com/get_video_info?video_id=" + vid).then(response => {
-            if (response.ok) {
-                response.text().then(data => {
+      var aacc;
+      var avel;
+      var acc;
+      var vel;
+      var pos;
+      var ang=0;
 
-                    var data = parse_str(data),
-                        streams = (data.url_encoded_fmt_stream_map + ',' + data.adaptive_fmts).split(',');
-
-                    streams.forEach(function(s, n) {
-                        var stream = parse_str(s),
-                            itag = stream.itag * 1,
-                            quality = false;
-                        console.log(stream);
-                        switch (itag) {
-                            case 139:
-                                quality = "48kbps";
-                                break;
-                            case 140:
-                                quality = "128kbps";
-                                break;
-                            case 141:
-                                quality = "256kbps";
-                                break;
-                        }
-                        if (quality) audio_streams[quality] = stream.url;
-                    });
-
-                    console.log(audio_streams);
-
-                    audio_tag.src = audio_streams['128kbps'];
-                    audio_tag.play();
-                })
-            }
-        });
+      function setup() {
+        acc = createVector(0,0);
+        vel = createVector(0,0);
+        aacc = createVector(0,0);
+        avel = createVector(0,0);
+        pos = createVector(200,200);
+        createCanvas(400, 400);
       }
-      function parse_str(str) {
-          return str.split('&').reduce(function(params, param) {
-              var paramSplit = param.split('=').map(function(value) {
-                  return decodeURIComponent(value.replace('+', ' '));
-              });
-              params[paramSplit[0]] = paramSplit[1];
-              return params;
-          }, {});
+
+      function render(){
+        rect(pos.x, pos.y,40,40);
+      }
+
+      function tick(){
+        rectMode(CENTER);
+        console.log(frameRate());
+        if(keyIsDown(38)){
+           acc.y-=0.005;
+        }
+        else{acc.y+=0.01;}
+        vel.add(acc);
+        pos.add(vel);
+      }
+
+      function draw() {
+        background(220);
+        tick();
+        render();
       }
     </script>
   </body>
