@@ -6,41 +6,61 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
     <script>
       var aacc;
-      var avel;
-      var acc;
-      var vel;
-      var pos;
-      var ang=0;
+var avel;
+var acc;
 
-      function setup() {
-        acc = createVector(0,0);
-        vel = createVector(0,0);
-        aacc = createVector(0,0);
-        avel = createVector(0,0);
-        pos = createVector(200,200);
-        createCanvas(400, 400);
-      }
+var pos;
+var ang = 0;
 
-      function render(){
-        rect(pos.x, pos.y,40,40);
-      }
+function setup() {
+  acc = createVector(0, 0);
+  vel = createVector(0, 0);
+  aacc = createVector(0, 0);
+  avel = createVector(0, 0);
+  pos = createVector(200, 200);
+  createCanvas(400, 400);
+  rectMode(CENTER);
+}
 
-      function tick(){
-        rectMode(CENTER);
-        console.log(frameRate());
-        if(keyIsDown(38)){
-           acc.y-=0.005;
-        }
-        else{acc.y+=0.01;}
-        vel.add(acc);
-        pos.add(vel);
-      }
+function render() {
+  fill(255, 0, 0);
 
-      function draw() {
-        background(220);
-        tick();
-        render();
-      }
+
+  translate(pos.x, pos.y);
+  rotate(ang);
+
+  rect(0, 0, 40, 40);
+
+}
+
+function tick() {
+
+  console.log(frameRate());
+  if (keyIsDown(38) || mouseIsPressed) {
+    acc.y -= 0.005;
+  } else {
+    acc.y += 0.01;
+  }
+  if (mouseIsPressed && mouseX > 200) {
+    ang += 0.01;
+  } else if (mouseIsPressed && mouseX < 200) {
+    ang -= 0.01;
+  }
+  pos.add(acc);
+}
+
+function mouseDragged() {
+  console.log("md");
+  acc.y -= 0.005;
+  acc.y -= 0.01;
+  pos.add(acc);
+}
+
+function draw() {
+  background(220);
+  tick();
+  render();
+}
     </script>
   </body>
 </html>
