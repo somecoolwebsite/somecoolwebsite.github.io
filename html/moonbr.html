@@ -24,7 +24,7 @@ function land(x,y,w,h){
 
 function c(x,y,w,h,xx,yy,ww,hh){
   var crash = false;
-  if (dist(x,y,xx,yy)<40) {
+  if (dist(x,y,xx,yy)<20) {
             crash = true;
         }
         return crash;
@@ -57,7 +57,7 @@ function render() {
 
 function tick() {
 
-  console.log(frameRate());
+
   if (keyIsDown(38) || mouseIsPressed){
     acc.y -= 0.005;
   } else {
@@ -73,7 +73,7 @@ function tick() {
 }
 
 function mouseDragged() {
-  console.log("md");
+
   acc.y -= 0.005;
   acc.y -= 0.01;
   pos.add(acc);
