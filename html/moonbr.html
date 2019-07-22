@@ -19,7 +19,7 @@
       var pos;
       var ang = 0;
       var ded = false;
-      var game = false;
+      var game = true;
       var number = 0;
       var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
 
@@ -90,6 +90,7 @@
           ang -= 0.01;
         }
         pos.add(acc);
+        socket.emit('g_player_pos',[pos.x,pos.y]);
       }
 
       function draw() {
@@ -104,6 +105,9 @@
           text(number, 200 - 20, 270);
         }
       }
+      socket.on('g_player_pos',function(data){
+        rect(data[0],data[1],30,30);
+      });
       socket.on('g_start_game',function(data){
         game=true;
       });
