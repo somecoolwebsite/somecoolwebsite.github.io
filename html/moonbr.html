@@ -71,10 +71,10 @@
         rect(0, 0, 40, 40);
         pop();
         textSize(20);
-        text("Velocity: "+Math.floor((acc.y)*10),20,20);
+        text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
         text("Max Velocity: 10", 140, 20);
-        text("FPS "+Math.floor(frameRate()),20,50);
-        text("Online: "+online, 140,50);
+        text("FPS " + Math.floor(frameRate()), 20, 50);
+        text("Online: " + online, 140, 50);
       }
 
       function tick() {
@@ -84,7 +84,7 @@
           acc.y += 0.01;
         }
         text(Math.floor((acc.y + acc.y) * 100) + "", 10, 20);
-        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y>=370) || (pos.y>=370 && (acc.y) >= 1)) {
+        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 1)) {
           ded = true;
         }
 
@@ -93,50 +93,53 @@
         }
         if (mouseIsPressed && mouseX > 200 || keyIsDown(39)) {
           ang += 0.01;
-          acc.x+=0.1;
+          acc.x += 0.1;
         } else if (mouseIsPressed && mouseX < 200 || keyIsDown(37)) {
           ang -= 0.01;
-          acc.x-=0.1;
+          acc.x -= 0.1;
         }
-        if (pos.y>=370) {
+        if (pos.y >= 370) {
           acc.y = 0;
           acc.x = 0;
-          ang=0;
+          ang = 0;
         }
         pos.add(acc);
-        socket.emit('g_player_pos',[pos.x,pos.y]);
+        socket.emit('g_player_pos', [pos.x, pos.y]);
       }
 
       function draw() {
 
         if (game) {
+          tick();
+          render();
         } else {
           background(220);
           textSize(20);
+          text("Online: " + online, 140, 50);
           text("Game Will Start In:", 200 - 80, 200);
           textSize(70);
           text(number, 200 - 20, 270);
         }
       }
-      socket.on('g_stats_people', function(data){
-        online=data;
+      socket.on('g_stats_people', function(data) {
+        online = data;
       });
-      socket.on('g_player_leave', function(data){
+      socket.on('g_player_leave', function(data) {
         var peopleindex = people.indexOf(data);
         people.splice(peopleindex, 1);
         online = people.length;
       });
-      socket.on('g_player_join',function(data){
+      socket.on('g_player_join', function(data) {
         people.push(data);
         online = people.length;
       });
-      socket.on('g_player_pos',function(data){
+      socket.on('g_player_pos', function(data) {
         tick();
         render();
-        rect(data[0],data[1],30,30);
+        rect(data[0], data[1], 30, 30);
       });
-      socket.on('g_start_game',function(data){
-        game=true;
+      socket.on('g_start_game', function(data) {
+        game = true;
       });
       socket.on('g_start_time', function(data) {
         number = data;
