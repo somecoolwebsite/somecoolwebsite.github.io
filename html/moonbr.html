@@ -25,6 +25,7 @@
       var people = [];
       var g_pend_render = [];
       var online = 0;
+      var debug;
       var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
 
       function land(x, y, w, h) {
@@ -46,6 +47,7 @@
       }
 
       function setup() {
+        debug = createDiv('');
         ground = new land(200, 395, 400, 10);
         acc = createVector(0, 0);
         vel = createVector(0, 0);
@@ -119,6 +121,7 @@
       }
       function logg(l){
         console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
+        div.elt.innerText="LOG - "+new Date().toLocaleTimeString()+": "+l+div.elt.innerText
       }
       function draw() {
 
