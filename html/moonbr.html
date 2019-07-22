@@ -21,6 +21,7 @@
       var ded = false;
       var game = false;
       var number = 0;
+      var people = [];
       var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
 
       function land(x, y, w, h) {
@@ -105,6 +106,13 @@
           text(number, 200 - 20, 270);
         }
       }
+      socket.on('g_player_leave', function(data){
+        var peopleindex = people.indexOf(data);
+        people.splice(peopleindex, 1);
+      });
+      socket.on('g_player_join',function(data){
+        people.push(data);
+      });
       socket.on('g_player_pos',function(data){
         rect(data[0],data[1],30,30);
       });
