@@ -90,7 +90,7 @@
         }
         textSize(20);
         text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
-        text("Max Velocity: 10", 140, 20);
+        text("Max Velocity: 5", 140, 20);
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
       }
@@ -101,7 +101,7 @@
           acc.y += 0.01;
         }
         text(Math.floor((acc.y + acc.y) * 100) + "", 10, 20);
-        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 1)) {
+        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 0.5)) {
           ded = true;
         }
         if (ded) {
