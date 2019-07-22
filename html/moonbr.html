@@ -52,7 +52,7 @@
         vel = createVector(0, 0);
         aacc = createVector(0, 0);
         avel = createVector(0, 0);
-        pos = createVector(200, 200);
+        pos = createVector(Math.floor((Math.random() * 400) + 1), Math.floor((Math.random() * 400) + 1));
         createCanvas(400, 400);
         rectMode(CENTER);
         debug = createDiv('');
