@@ -67,6 +67,13 @@
         rotate(ang);
         rect(0, 0, 40, 40);
         pop();
+        for(var i=0;i<people.length;i++){
+          push();
+          translate(people[i][1], people[i][2]);
+          rotate(0);
+          rect(0, 0, 40, 40);
+          pop();
+        }
       }
 
       function tick() {
@@ -114,7 +121,8 @@
         people.push(data);
       });
       socket.on('g_player_pos',function(data){
-        rect(data[0],data[1],30,30);
+        var peopleindex = people.indexOf(data);
+        people[i] = data;
       });
       socket.on('g_start_game',function(data){
         game=true;
