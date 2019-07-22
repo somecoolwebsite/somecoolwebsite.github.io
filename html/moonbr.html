@@ -114,7 +114,7 @@
         pos.add(acc);
         socket.emit('g_player_pos', [pos.x, pos.y]);
       }
-      function log(l){
+      function logg(l){
         console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
       }
       function draw() {
@@ -132,31 +132,31 @@
         }
       }
       socket.on('g_stats_people', function(data) {
-        log("g_stats_people: "+data);
+        logg("g_stats_people: "+data);
         online = data;
       });
       socket.on('g_player_leave', function(data) {
-        log("g_player_leave: "+data);
+        logg("g_player_leave: "+data);
         var peopleindex = people.indexOf(data);
         people.splice(peopleindex, 1);
         online = people.length;
       });
       socket.on('g_player_join', function(data) {
-        log("g_player_join: "+data);
+        logg("g_player_join: "+data);
         people.push(data);
         online = people.length;
       });
       socket.on('g_player_pos', function(data) {
-        log("g_player_pos: "+data);
+        logg("g_player_pos: "+data);
         g_pend_render.push(data);
         rect(data[0], data[1], 30, 30);
       });
       socket.on('g_start_game', function(data) {
-        log("g_start_game: "+data);
+        logg("g_start_game: "+data);
         game = true;
       });
       socket.on('g_start_time', function(data) {
-        log("g_start_time: "+data)
+        logg("g_start_time: "+data)
         number = data;
       });
     </script>
