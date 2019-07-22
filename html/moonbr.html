@@ -30,7 +30,6 @@
       var online = 0;
       var debug;
       var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
-
       function land(x, y, w, h) {
         this.x = x;
         this.y = y;
@@ -40,7 +39,6 @@
           image(moon,this.x, this.y, this.w, this.h);
         }
       }
-
       function c(x, y, w, h, xx, yy, ww, hh) {
         var crash = false;
         if (dist(x, y, xx, yy) < 25) {
@@ -48,12 +46,11 @@
         }
         return crash;
       }
-
       function setup() {
         explosion = loadImage('https://somecoolwebsite.github.io/html/images/explosion.png');
         lander = loadImage('https://somecoolwebsite.github.io/html/images/kisspng-apollo-lunar-module-apollo-program-lander-moon-cli-module-icon-5b3fcbfbe67b16.2145793315309076439441.png');
         moon = loadImage('https://somecoolwebsite.github.io/html/images/moon-surface-clipart__k8448360.jpg');
-        ground = new land(200, 395, 400, 10);
+        ground = new land(200, 240, 400, 0);
         acc = createVector(0, 0);
         vel = createVector(0, 0);
         aacc = createVector(0, 0);
@@ -64,9 +61,8 @@
         imageMode(CENTER);
         debug = createDiv('');
       }
-
       function render() {
-        background(220);
+        background(500);
         fill(190);
         ground.render();
         fill(255, 0, 0);
@@ -98,7 +94,6 @@
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
       }
-
       function tick() {
         if (keyIsDown(38) || mouseIsPressed) {
           acc.y += -0.005;
@@ -109,7 +104,6 @@
         if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 1)) {
           ded = true;
         }
-
         if (ded) {
           return;
         }
@@ -133,7 +127,6 @@
         debug.elt.innerHTML="<p>LOG - "+new Date().toLocaleTimeString()+": "+l+"</p>"+debug.elt.innerHTML
       }
       function draw() {
-
         if (game) {
           tick();
           render();
