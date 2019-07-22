@@ -21,6 +21,8 @@
       var ang = 0;
       var ded = false;
       var game = false;
+      var lander;
+      var moon;
       var number = 0;
       var people = [];
       var g_pend_render = [];
@@ -34,7 +36,7 @@
         this.w = w;
         this.h = h;
         this.render = function() {
-          rect(this.x, this.y, this.w, this.h);
+          image(moon,this.x, this.y, this.w, this.h);
         }
       }
 
@@ -47,6 +49,8 @@
       }
 
       function setup() {
+        lander = loadImage('https://somecoolwebsite.github.io/html/images/kisspng-apollo-lunar-module-apollo-program-lander-moon-cli-module-icon-5b3fcbfbe67b16.2145793315309076439441.png');
+        moon = loadImage('https://somecoolwebsite.github.io/html/images/moon-surface-clipart__k8448360.jpg');
         ground = new land(200, 395, 400, 10);
         acc = createVector(0, 0);
         vel = createVector(0, 0);
@@ -71,7 +75,7 @@
         push();
         translate(pos.x, pos.y);
         rotate(ang);
-        rect(0, 0, 40, 40);
+        image(lander, 0, 0, 40, 40);
         pop();
         for(var i=0;i<g_pend_render.length;i++){
           if(c(pos.x, pos.y, 40, 40, g_pend_render[i][0], g_pend_render[i][1], 30, 30)){
@@ -79,7 +83,7 @@
           }
           push();
           translate(g_pend_render[i][0], g_pend_render[i][1]);
-          rect(0, 0, 30, 30);
+          image(lander, 0, 0, 30, 30);
           pop();
           g_pend_render.splice(i,1);
         }
