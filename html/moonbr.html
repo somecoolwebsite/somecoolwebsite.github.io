@@ -74,6 +74,7 @@
         text("Max Velocity: 10", 140, 20);
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
+        background(220);
       }
 
       function tick() {
@@ -135,7 +136,6 @@
       socket.on('g_player_pos', function(data) {
         tick();
         render();
-        background(220);
         rect(data[0], data[1], 30, 30);
       });
       socket.on('g_start_game', function(data) {
