@@ -76,13 +76,13 @@
           translate(g_pend_render[i][1], g_pend_render[i][2]);
           rect(0, 0, 30, 30);
           pop();
+          splice(i,1);
         }
         textSize(20);
         text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
         text("Max Velocity: 10", 140, 20);
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
-        
       }
 
       function tick() {
