@@ -56,7 +56,6 @@
       }
 
       function render() {
-        background(220);
         fill(190);
         ground.render();
         fill(255, 0, 0);
@@ -136,6 +135,7 @@
       socket.on('g_player_pos', function(data) {
         tick();
         render();
+        background(0);
         rect(data[0], data[1], 30, 30);
       });
       socket.on('g_start_game', function(data) {
