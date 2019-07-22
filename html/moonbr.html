@@ -72,6 +72,9 @@
         rect(0, 0, 40, 40);
         pop();
         for(var i=0;i<g_pend_render.length;i++){
+          if(c(pos.x, pos.y, 40, 40, g_pend_render[i][0], g_pend_render[i][1], 30, 30)){
+            ded=true;
+          }
           push();
           translate(g_pend_render[i][0], g_pend_render[i][1]);
           rect(0, 0, 30, 30);
