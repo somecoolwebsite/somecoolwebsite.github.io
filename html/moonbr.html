@@ -135,7 +135,7 @@
       socket.on('g_player_pos', function(data) {
         tick();
         render();
-        background(0);
+        background(220);
         rect(data[0], data[1], 30, 30);
       });
       socket.on('g_start_game', function(data) {
