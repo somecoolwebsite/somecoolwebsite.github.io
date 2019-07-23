@@ -25,6 +25,7 @@
       var moon;
       var explosion;
       var fuel = 100;
+      var landed = false;
       var number = 0;
       var people = [];
       var g_pend_render = [];
@@ -106,9 +107,13 @@
           acc.y += 0.01;
         }
         text(Math.floor((acc.y + acc.y) * 100) + "", 10, 20);
+        if(!ded){
         if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 0.75)) {
           ded = true;
-        }
+          setTimeout(function(){
+            setup();
+          },1000);
+        }}
         if (ded) {
           return;
         }
@@ -124,12 +129,16 @@
           acc.x -= 0.1;
         }
         if (pos.y >= 370) {
+          setup();
+          landed = true;
           acc.y = 0;
           acc.x = 0;
           ang = 0;
         }
         pos.add(acc);
-        socket.emit('g_player_pos', [pos.x, pos.y]);
+        if(!landed){
+          socket.emit('g_player_pos', [pos.x, pos.y]);
+        }
       }
       function logg(l){
         console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
