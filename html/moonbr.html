@@ -112,6 +112,7 @@
         text("Max Velocity: 7", 140, 20);
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
+        g_pend_render = [];
       }
       function tick() {
         if (keyIsDown(38) || mouseIsPressed) {
@@ -158,6 +159,7 @@
         if(!landed){
           socket.emit('g_player_pos', [pos.x, pos.y]);
         }
+        g_pend_render = [];
       }
       function logg(l){
         console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
