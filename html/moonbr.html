@@ -20,7 +20,7 @@
       var pos;
       var ang = 0;
       var ded = false;
-      var game = false;
+      var game = true;
       var lander;
       var moon;
       var explosion;
@@ -80,6 +80,7 @@
           image(lander, 0, 0, 40, 40);
         }
         pop();
+        g_pend_render = [...new Set(g_pend_render)]
         for(var i=0;i<g_pend_render.length;i++){
           if(c(pos.x, pos.y, 40, 40, g_pend_render[i][0], g_pend_render[i][1], 30, 30)){
             ded=true;
