@@ -96,7 +96,7 @@
           image(lander, 0, 0, 40, 40);
         }
         pop();
-        g_pend_render = [...new Set(g_pend_render)]
+        
         for(var i=0;i<g_pend_render.length;i++){
           if(c(pos.x, pos.y, 40, 40, g_pend_render[i][0], g_pend_render[i][1], 30, 30)){
             ded=true;
@@ -107,7 +107,6 @@
           pop();
           g_pend_render.splice(i,1);
         }
-        g_pend_render = [];
         textSize(20);
         text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
         text("Max Velocity: 7", 140, 20);
