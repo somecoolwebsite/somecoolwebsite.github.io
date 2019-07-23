@@ -49,6 +49,21 @@
         }
         return crash;
       }
+      function reset(){
+        ang = 0;
+        ded = false;
+        game = true;
+        fuel = 100;
+        landed = false;
+        number = 0;
+        g_pend_render = [];
+        online = 0;
+        acc = createVector(0, 0);
+        vel = createVector(0, 0);
+        aacc = createVector(0, 0);
+        avel = createVector(0, 0);
+        pos = createVector(Math.floor((Math.random() * 400) + 1), 200);
+      }
       function setup() {
         explosion = loadImage('https://somecoolwebsite.github.io/html/images/explosion.png');
         lander = loadImage('https://somecoolwebsite.github.io/html/images/kisspng-apollo-lunar-module-apollo-program-lander-moon-cli-module-icon-5b3fcbfbe67b16.2145793315309076439441.png');
