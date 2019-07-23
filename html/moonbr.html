@@ -24,12 +24,14 @@
       var lander;
       var moon;
       var explosion;
+      var fuel = 100;
       var number = 0;
       var people = [];
       var g_pend_render = [];
       var online = 0;
       var debug;
       var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
+      
       function land(x, y, w, h) {
         this.x = x;
         this.y = y;
@@ -97,6 +99,8 @@
       function tick() {
         if (keyIsDown(38) || mouseIsPressed) {
           acc.y += -0.005;
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
         } else {
           acc.y += 0.01;
         }
@@ -108,9 +112,13 @@
           return;
         }
         if (mouseIsPressed && mouseX > 200 || keyIsDown(39)) {
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
           ang += 0.01;
           acc.x += 0.1;
         } else if (mouseIsPressed && mouseX < 200 || keyIsDown(37)) {
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
           ang -= 0.01;
           acc.x -= 0.1;
         }
