@@ -126,7 +126,7 @@
         if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 0.75)) {
           ded = true;
           setTimeout(function(){
-            setup();
+            reset();
           },1000);
         }}
         if (ded) {
@@ -144,7 +144,11 @@
           acc.x -= 0.1;
         }
         if (pos.y >= 370) {
-          setup();
+          if(!landed){
+            setTimeout(function(){
+              reset();
+            },1000);
+          }
           landed = true;
           acc.y = 0;
           acc.x = 0;
