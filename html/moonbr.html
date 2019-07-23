@@ -107,12 +107,12 @@
           pop();
           g_pend_render.splice(i,1);
         }
+        g_pend_render = [];
         textSize(20);
         text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
         text("Max Velocity: 7", 140, 20);
         text("FPS " + Math.floor(frameRate()), 20, 50);
         text("Online: " + online, 140, 50);
-        g_pend_render = [];
       }
       function tick() {
         if (keyIsDown(38) || mouseIsPressed) {
@@ -159,7 +159,6 @@
         if(!landed){
           socket.emit('g_player_pos', [pos.x, pos.y]);
         }
-        g_pend_render = [];
       }
       function logg(l){
         console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
@@ -179,31 +178,25 @@
         }
       }
       socket.on('g_stats_people', function(data) {
-        logg("g_stats_people: "+data);
         online = data;
       });
       socket.on('g_player_leave', function(data) {
-        logg("g_player_leave: "+data);
         var peopleindex = people.indexOf(data);
         people.splice(peopleindex, 1);
         online = people.length;
       });
       socket.on('g_player_join', function(data) {
-        logg("g_player_join: "+data);
         people.push(data);
         online = people.length;
       });
       socket.on('g_player_pos', function(data) {
-        logg("g_player_pos: "+data);
         g_pend_render.push(data);
         rect(data[0], data[1], 30, 30);
       });
       socket.on('g_start_game', function(data) {
-        logg("g_start_game: "+data);
         game = true;
       });
       socket.on('g_start_time', function(data) {
-        logg("g_start_time: "+data)
         number = data;
       });
     </script>
