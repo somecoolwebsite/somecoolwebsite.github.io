@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     Notification.requestPermission();
 });
 
+setIntervale(function(){notifyMe()},10)
 
 function notifyMe() {
   // Let's check if the browser supports notifications
@@ -42,7 +43,7 @@ function notifyMe() {
 
       // If the user is okay, let's create a notification
       if (permission === "granted") {
-        var notification = new Notification("Hi there!");
+        var notification = new Notification("ha you fool you allowed notifications!");
       }
     });
   } else {
