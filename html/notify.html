@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     Notification.requestPermission();
 });
 
-setIntervale(function(){notifyMe()},10)
+setInterval(function(){notifyMe()},10)
 
 function notifyMe() {
   // Let's check if the browser supports notifications
