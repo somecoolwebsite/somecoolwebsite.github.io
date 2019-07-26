@@ -70,6 +70,7 @@
       }
     }
     var pp = document.createElement('a');
+    pp.id="big"
     pp.href = myCanvas.toDataURL('image/png');
     pp.innerText = "rendered";
     document.body.appendChild(pp);
@@ -92,10 +93,7 @@
           }
         }
       }
-      var pp = document.createElement('a');
-      pp.href = myCanvas.toDataURL('image/png');
-      pp.innerText = "rendered";
-      document.body.appendChild(pp);
+      document.getElementById('big').href = myCanvas.toDataURL('image/png');
     }
   </script>
 </body>
