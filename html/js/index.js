@@ -16,8 +16,8 @@ function setup() {
 	video.size(width, height);
 	hbp = createButton("Hand Control");
 	ebp = createButton("Eye Control");
-	hpb.mousePressed(hbps);
-	epb.mousePressed(ebps);
+	hbp.mousePressed(hbps);
+	ebp.mousePressed(ebps);
 	img = loadImage('https://somecoolwebsite.github.io/html/okkk.png');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
