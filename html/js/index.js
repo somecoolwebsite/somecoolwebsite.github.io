@@ -30,8 +30,9 @@ function draw() {
 		image(video, 0, 0, width, height);
 	}
 	//draw the spooky scary skelertons that send shivers down ur spine
-	drawKeypoints();
-	drawSkeleton();
+	drawKeypoints(); //This only draws the image at the wrists and eyes so we can play music according to the x and y of the hand
+	//We dont need drawSkeleton coz it has no purpose
+	//drawSkeleton();
 }
 
 function drawKeypoints()  {
@@ -40,7 +41,7 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
-				if(j===1||j===2||j===9||j===10){
+				if(j===1||j===2||j===9||j===10){ //this only runs when its the wrists or the eyes
 				imageMode(CENTER);
 				image(img, keypoint.position.x, keypoint.position.y, 100, 100);}
 			}
