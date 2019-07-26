@@ -87,7 +87,7 @@
             //Draw a black
             ctx.fillRect(x, y, 1, 1);
           } else {
-            ctx.fillStyle = `rgb(0, ${belongsToSet*4}, ${belongsToSet*2}%)`;
+            ctx.fillStyle = `rgb(${Math.random() * (255 - 0) + 0}, ${belongsToSet*4}, ${belongsToSet*2}%)`;
             //Draw color
             ctx.fillRect(x, y, 1, 1);
           }
