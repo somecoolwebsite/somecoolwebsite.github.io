@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    (() => {
+      // Create Canvas
+      const myCanvas = document.createElement('canvas');
+      myCanvas.width = window.innerWidth;
+      myCanvas.height = window.innerHeight;
+      document.body.appendChild(myCanvas);
+      const ctx = myCanvas.getContext('2d');
+      // Start drawing
+      function checkIfBelongsToMandelbrotSet(x, y) {
+        let realComponentOfResult = x;
+        let imaginaryComponentOfResult = y;
+        // Set max number of iterations
+        const maxIterations = 350;
+        for (let i = 0; i < maxIterations; i++) {
+          const tempRealComponent = realComponentOfResult * realComponentOfResult - imaginaryComponentOfResult * imaginaryComponentOfResult + x;
+          const tempImaginaryComponent = 2.0 * realComponentOfResult * imaginaryComponentOfResult + y;
+          realComponentOfResult = tempRealComponent;
+          imaginaryComponentOfResult = tempImaginaryComponent;
+          // Return a number as a percentage
+          if (realComponentOfResult * imaginaryComponentOfResult > 5) {
+            return (i / maxIterations * 100);
+          }
+        }
+        // Return zero if in set
+        return 0;
+      }
+      
+      //=======================
+      //START OF RENDERING!!!
+      //=======================
+      
+      //Set the position and zoom
+      const magnificationFactor = 30000;
+      const panX = 0.7008029;
+      const panY = 0.3550108;
+      /*i usually use
+      const magnificationFactor = 30000;
+      const panX = 0.7008029;
+      const panY = 0.3550108;
+      or
+      const magnificationFactor = 100000;
+      const panX = 0.7;
+      const panY = 0.3;
+      or
+      const magnificationFactor = 4000000;
+      const panX = 0.7009;
+      const panY = 0.36;
+      or
+      const magnificationFactor = 300;
+      const panX = 1;
+      const panY = 1;
+      */
+      for (let x = 0; x < myCanvas.width; x++) {
+        for (let y = 0; y < myCanvas.height; y++) {
+          const belongsToSet = checkIfBelongsToMandelbrotSet(x / magnificationFactor - panX, y / magnificationFactor - panY);
+          if (belongsToSet === 0) {
+            ctx.fillStyle = '#000';
+            //Draw a black
+            ctx.fillRect(x, y, 1, 1);
+          } else {
+            ctx.fillStyle = `rgb(0, ${belongsToSet*4}, ${belongsToSet*2}%)`;
+            //Draw color
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+      }
+      var pp = document.createElement('a');
+      pp.href = myCanvas.toDataURL('image/png');
+      pp.innerText = "rendered";
+      document.body.appendChild(pp);
+    })();
+  </script>
+</body>
+
+</html>
