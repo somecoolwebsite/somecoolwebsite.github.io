@@ -13,7 +13,7 @@ function setup() {
 	video = createCapture(VIDEO);
 	video.size(width, height);
 	img = loadImage('https://somecoolwebsite.github.io/html/okkk.png');
-	ear = loadImage('https://owips.com/sites/default/files/styles/225x120/public/clipart/shrek-clipart/197190/shrek-clipart-ear-197190-3802684.jpg?itok=8j1OUjlh');
+	ear = loadImage('https://somecoolwebsite.github.io/html/okkk.png');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
 	//does some detection stuff
