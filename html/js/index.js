@@ -40,6 +40,7 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
+				if(i===1||i===2||i===9||i===10)
 				imageMode(CENTER);
 				image(img, keypoint.position.x, keypoint.position.y, 100, 100);
 			}
