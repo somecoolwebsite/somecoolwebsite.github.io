@@ -6,6 +6,7 @@ let img;
 var jp = false;
 
 function setup() {
+	var synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
@@ -44,6 +45,7 @@ function drawKeypoints()  {
 				if(j===1||j===2||j===9||j===10){ //this only runs when its the wrists or the eyes
 				imageMode(CENTER);
 				image(img, keypoint.position.x, keypoint.position.y, 100, 100);}
+				synth.triggerAttackRelease(keypoint.position.y*10,'16n');
 			}
 		}
 	}
