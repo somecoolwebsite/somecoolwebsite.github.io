@@ -3,6 +3,7 @@ let poseNet;
 let poses = [];
 let skeletons = [];
 let img;
+let ear;
 var jp = false;
 var synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
 
@@ -12,6 +13,7 @@ function setup() {
 	video = createCapture(VIDEO);
 	video.size(width, height);
 	img = loadImage('https://somecoolwebsite.github.io/html/okkk.png');
+	ear = loadImage('https://owips.com/sites/default/files/styles/225x120/public/clipart/shrek-clipart/197190/shrek-clipart-ear-197190-3802684.jpg?itok=8j1OUjlh');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
 	//does some detection stuff
@@ -46,6 +48,8 @@ function drawKeypoints()  {
 				imageMode(CENTER);
 				image(img, keypoint.position.x, keypoint.position.y, 100, 100);
 				synth.triggerAttackRelease(keypoint.position.y,'8n');}
+				if(j===3||j===4){imageMode(CENTER);
+				image(ear, keypoint.position.x, keypoint.position.y, 100, 100); }
 				
 			}
 		}
