@@ -4,9 +4,10 @@ let poses = [];
 let skeletons = [];
 let img;
 var jp = false;
+var synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
 
 function setup() {
-	var synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+	
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
