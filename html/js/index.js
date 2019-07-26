@@ -5,13 +5,19 @@ let skeletons = [];
 let img;
 var jp = false;
 var synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+var bp = "hand";
+var hbp;
+var ebp;
 
 function setup() {
 	
 	createCanvas(640, 480);
 	video = createCapture(VIDEO);
 	video.size(width, height);
-	
+	hbp = createButton("Hand Control");
+	ebp = createButton("Eye Control");
+	hpb.mousePressed(hbps);
+	epb.mousePressed(ebps);
 	img = loadImage('https://somecoolwebsite.github.io/html/okkk.png');
 	//makes a knew pose instance
 	poseNet = ml5.poseNet(video, modelReady);
@@ -20,6 +26,9 @@ function setup() {
 		poses = results;
 	});
 }
+
+function ebps(){bp="eyes";}
+function hbps(){bp="hand";}
 
 function modelReady() {
 	select('#status').html('Model Loaded');
@@ -43,9 +52,18 @@ function drawKeypoints()  {
 			let keypoint = poses[i].pose.keypoints[j];
 			//only draw the thing if the ai isnt bullsh*ting u
 			if (keypoint.score > 0.2) {
-				if(j===9||j===10){ //this only runs when its the wrists or the eyes
-				imageMode(CENTER);
-				image(img, keypoint.position.x, keypoint.position.y, 100, 100);synth.triggerAttackRelease(keypoint.position.y,'8n');}
+				if(bp==="hand"){
+					if(j===9||j===10){ //this only runs when its the wrists or the eyes
+					imageMode(CENTER);
+					image(img, keypoint.position.x, keypoint.position.y, 100, 100);
+					synth.triggerAttackRelease(keypoint.position.y,'8n');}
+				}
+				if(bp==="eyes"){
+					if(j===1||j===2){ //this only runs when its the wrists or the eyes
+					imageMode(CENTER);
+					image(img, keypoint.position.x, keypoint.position.y, 100, 100);
+					synth.triggerAttackRelease(keypoint.position.y,'8n');}
+				}
 				
 			}
 		}
