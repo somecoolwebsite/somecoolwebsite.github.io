@@ -2,6 +2,7 @@
 <html>
 
 <body>
+  <button onclick="reset()">New Fractal</button>
   <script>
     (() => {
       // Create Canvas
@@ -73,6 +74,31 @@
       pp.href = myCanvas.toDataURL('image/png');
       pp.innerText = "rendered";
       document.body.appendChild(pp);
+      
+      function reset(){
+        const magnificationFactor = Math.random() * (100000 - 1000) + 1000;
+        const panX = Math.random() * (0.7008029 - 0.7) + 0.7;
+        const panY = Math.random() * (0.3550108 - 0.3) + 0.3;
+        for (let x = 0; x < myCanvas.width; x++) {
+          for (let y = 0; y < myCanvas.height; y++) {
+            const belongsToSet = checkIfBelongsToMandelbrotSet(x / magnificationFactor - panX, y / magnificationFactor - panY);
+            if (belongsToSet === 0) {
+              ctx.fillStyle = '#000';
+              //Draw a black
+              ctx.fillRect(x, y, 1, 1);
+            } else {
+              ctx.fillStyle = `rgb(0, ${belongsToSet*4}, ${belongsToSet*2}%)`;
+              //Draw color
+              ctx.fillRect(x, y, 1, 1);
+            }
+          }
+        }
+        var pp = document.createElement('a');
+        pp.href = myCanvas.toDataURL('image/png');
+        pp.innerText = "rendered";
+        document.body.appendChild(pp);
+      }
+      
     })();
   </script>
 </body>
