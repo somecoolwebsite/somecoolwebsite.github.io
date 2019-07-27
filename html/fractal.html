@@ -59,18 +59,18 @@
     var rred = Math.random() * (60 - 40) + 40;
     var mb = Math.random() * (2 - 1) + 1;
     var mg = Math.random() * (4 - 1) + 1;
-    for (let x = 0; x < myCanvas.width*4; x++) {
+    for (let x = 0; x < myCanvas.width; x++) {
       for (let y = 0; y < myCanvas.height*4; y++) {
         const belongsToSet = checkIfBelongsToMandelbrotSet(x / magnificationFactor - panX, y / magnificationFactor - panY);
         if (belongsToSet === 0) {
           ctx.fillStyle = '#000';
           //Draw a black
-          ctx.fillRect(x/4, y/4, 0.5, 0.5);
+          ctx.fillRect(x, y, 1, 1);
         } else {
           
           ctx.fillStyle = `rgb(${rred}, ${belongsToSet*mg}, ${belongsToSet*mb}%)`;
           //Draw color
-          ctx.fillRect(x/4, y/4, 0.5, 0.5);
+          ctx.fillRect(x, y, 1, 1);
         }
       }
     }
@@ -87,17 +87,17 @@
       const magnificationFactor = Math.random() * (100000 - 1000) + 1000;
       const panX = Math.random() * (0.7008029 - 0.7) + 0.7;
       const panY = Math.random() * (0.3550108 - 0.3) + 0.3;
-      for (let x = 0; x < myCanvas.width*4; x++) {
-        for (let y = 0; y < myCanvas.height*4; y++) {
+      for (let x = 0; x < myCanvas.width; x++) {
+        for (let y = 0; y < myCanvas.height; y++) {
           const belongsToSet = checkIfBelongsToMandelbrotSet(x / magnificationFactor - panX, y / magnificationFactor - panY);
           if (belongsToSet === 0) {
             ctx.fillStyle = '#000';
             //Draw a black
-            ctx.fillRect(x/4, y/4, 0.5, 0.5);
+            ctx.fillRect(x, y, 1, 1);
           } else {
             ctx.fillStyle = `rgb(${rred}, ${belongsToSet*mg}, ${belongsToSet*mb}%)`;
             //Draw color
-            ctx.fillRect(x/4, y/4, 0.5, 0.5);
+            ctx.fillRect(x, y, 1, 1);
           }
         }
       }
