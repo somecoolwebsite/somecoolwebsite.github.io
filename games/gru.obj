@@ -1,7 +1,5 @@
 # Object Export From Tinkercad Server 2015
 
-mtllib obj.mtl
-
 o obj_0
 v -45.72 		-10.97 		80.08
 v -45.72 		-10.97 		81.56
