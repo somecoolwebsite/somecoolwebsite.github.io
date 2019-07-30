@@ -23,7 +23,34 @@ function setup() {
   wick = loadImage('https://somecoolwebsite.github.io/games/cog/wick.jpg');
 }
 
-//function 
+function cogfighter(x,y,z,size,img){
+  this.x = x;
+  this.y = y;
+  this.z = z;
+  this.size = size;
+  this.img = loadImage(img);
+  this.tick = function(){
+    //u gotta override this function to use
+  }
+  this.render = function(){
+    push();
+    translate(this.x,this.y,this.z);
+    normalMaterial();
+    texture(this.img);
+    box(this.size);
+    pop();
+  }
+  this.run = function(){
+    this.tick();
+    this.render();
+  }
+  this.collision = function(o){
+    if(dist(x,y,z,o.x,o.y,o.z)<=50){
+      return true;
+    }
+    else{return false;}
+  }
+}
 
 function tick(){
   if(!keyIsDown(32)){
