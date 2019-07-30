@@ -14,11 +14,11 @@ var sry = 0;
 var srz = 0;
 
 function setup() {
-  createCanvas(400, 400, WEBGL);
+  createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   
-  gru = loadModel('./gru.obj');
-  mat = loadImage('./mat.jpg');
-  cov = loadImage('./images%20(17).jpeg');
+  gru = loadModel('https://raw.githubusercontent.com/somecoolwebsite/somecoolwebsite.github.io/master/games/cog/gru.obj');
+  mat = loadImage('https://somecoolwebsite.github.io/games/cog/mat.jpg');
+  cov = loadImage('https://somecoolwebsite.github.io/games/cog/images%20(17).jpeg');
 }
 
 function tick(){
