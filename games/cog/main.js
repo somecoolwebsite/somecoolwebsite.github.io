@@ -2,6 +2,7 @@ var gru;
 var mat;
 var cov;
 var wick;
+var objs = [];
 var x = 0;
 var y = 160;
 var z = 0;
@@ -17,16 +18,21 @@ var srz = 0;
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   
+  
+  
   gru = loadModel('https://raw.githubusercontent.com/somecoolwebsite/somecoolwebsite.github.io/master/games/cog/gru.obj');
   mat = loadImage('https://somecoolwebsite.github.io/games/cog/ray.png');
   cov = loadImage('https://somecoolwebsite.github.io/games/cog/images%20(17).jpeg');
   wick = loadImage('https://somecoolwebsite.github.io/games/cog/wick.jpg');
 }
 
-function cogfighter(x,y,z,size,img){
+function cog(x,y,z,rx,ry,rz,size,img){
   this.x = x;
   this.y = y;
   this.z = z;
+  this.rx = rx;
+  this.ry = ry;
+  this.rz = rz;
   this.size = size;
   this.img = loadImage(img);
   this.tick = function(){
@@ -35,6 +41,9 @@ function cogfighter(x,y,z,size,img){
   this.render = function(){
     push();
     translate(this.x,this.y,this.z);
+    rotateX(this.rx);
+    rotateY(this.ry);
+    rotateZ(this.rz);
     normalMaterial();
     texture(this.img);
     box(this.size);
@@ -108,6 +117,9 @@ function render(){
 
 function draw() {
   background(220);
+  for(var i=0;i<objs.length;i++){
+    objs[i].run();
+  }
   tick();
   render();
 }
