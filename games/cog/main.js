@@ -23,6 +23,8 @@ function setup() {
   wick = loadImage('https://somecoolwebsite.github.io/games/cog/wick.jpg');
 }
 
+//function 
+
 function tick(){
   if(!keyIsDown(32)){
     sry=ry;
@@ -67,7 +69,7 @@ function render(){
   normalMaterial();
   texture(cov);
   rotateY(frameCount*0.001);
-  box(1500);
+  box(2000);
   pop();
   push();
   translate(-100,115,-300);
