@@ -1,6 +1,7 @@
 var gru;
 var mat;
 var cov;
+var wick;
 var x = 0;
 var y = 160;
 var z = 0;
@@ -17,8 +18,9 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   
   gru = loadModel('https://raw.githubusercontent.com/somecoolwebsite/somecoolwebsite.github.io/master/games/cog/gru.obj');
-  mat = loadImage('https://somecoolwebsite.github.io/games/cog/mat.jpg');
-  cov = loadImage('https://somecoolwebsite.github.io/games/cog/images%20(17).jpeg');
+  mat = loadImage('./ray.png');
+  cov = loadImage('./images%20(17).jpeg');
+  wick = loadImage('./wick.jpg');
 }
 
 function tick(){
@@ -59,7 +61,7 @@ function render(){
   rotateY(sry);
   rotateZ(srz);
   texture(mat);
-  box(20);
+  box(60);
   pop();
   push();
   normalMaterial();
