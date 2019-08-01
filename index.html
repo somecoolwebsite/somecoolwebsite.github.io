@@ -52,7 +52,6 @@
 					}
 					return output;
 				}
-				setTimeout(function() {
 							var intensity = 0;
 							function zalgoTitle() {
 									if (intensity < 30)
@@ -61,7 +60,6 @@
 									setTimeout(zalgoTitle, 500);
 							}
 							zalgoTitle();
-					}, 60000);
 				}
 				catch (e) {
 					const error = document.getElementById('error');
