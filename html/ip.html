@@ -3,10 +3,25 @@
   <title>IP Information</title>
  </head>
  <body>
-  <p>TODO: everything</p>
+  <p>Enter IP To Analyse</p>
+  <input id="txtt" type="text">
+  <div id="content"></div>
   <script>
    //TODO: Make requests to https://ipinfo.io/the.ip.u.want/json
-   //TODO: Make port/subnet scanner?
+   function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+    document.onkeypress = function(e){if(e.keyCode===13){send();}}
+    function send(){
+        var txt = document.getElementById("txtt").value;
+        var randtxt = httpGet("https://cors-anywhere.herokuapp.com/https://ipinfo.io/"+txt+"/json");
+        updateContent();
+        document.getElementById("txtt").value = "";
+    }
   </script>
  </body>
 </html>
