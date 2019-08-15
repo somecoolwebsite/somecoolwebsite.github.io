@@ -19,7 +19,7 @@
     function send(){
         var txt = document.getElementById("txtt").value;
         var randtxt = httpGet("https://cors-anywhere.herokuapp.com/https://ipinfo.io/"+txt+"/json");
-        updateContent();
+        document.getElementById('content').innerText = randtxt;
         document.getElementById("txtt").value = "";
     }
   </script>
