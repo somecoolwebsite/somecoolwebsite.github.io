@@ -214,24 +214,16 @@ function draw() {
   });
   bestthisgen = genmax.score;
   if (currbirds <= 0) {
-    if (resing) {
-      var max = curryBirds.reduce(function(prev, current) {
-        return (prev.score > current.score) ? prev : current
-      });
-      initarrays(max.brain.weights);
-      currbirds = birdsamt;
-    }else{
-      var mmax = curryBirds.reduce(function(prev, current) {
-        return (prev.score > current.score) ? prev : current
-      });
-      initarrays(mmax.brain.weights);
-      currbirds = birdsamt;
-      gen++;
-      if (best < mmax.score) {
-        best = mmax.score;
-      }
-      prevscores.push(mmax.score);
+    var max = curryBirds.reduce(function(prev, current) {
+      return (prev.score > current.score) ? prev : current
+    });
+    initarrays(max.brain.weights);
+    currbirds = birdsamt;
+    gen++;
+    if (best < max.score) {
+      best = max.score;
     }
+    prevscores.push(max.score);
 
 
 
