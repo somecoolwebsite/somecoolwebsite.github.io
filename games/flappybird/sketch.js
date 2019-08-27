@@ -9,6 +9,7 @@ var tNoise = 20;
 var gen = 0;
 var best = 0;
 var bestthisgen = 0;
+var prevscores = [];
 
 function pipe() {
   this.x = 500;
@@ -153,6 +154,23 @@ function initarrays(weights) {
   }
 }
 
+function drawLines(data, color) {
+  stroke(0);
+  // draw lines
+  let px = 0;
+  let py = data[0];
+  for (let i = 0; i < data.length; i++) {
+    let x = i * (width / (data.length - 1));
+    let y = data[i] / 10;
+    stroke(color[0], color[1], color[2]);
+    line(px, py, x, y);
+    stroke(0, 0, 0)
+    //store the last position
+    px = x;
+    py = y;
+  }
+}
+
 function setup() {
   createCanvas(500, 500);
   initarrays([]);
@@ -203,6 +221,7 @@ function draw() {
     if (best < max.score) {
       best = max.score;
     }
+    prevscores.push(max.score);
   }
   pipes.forEach(function(pipe, i) {
     pipe.tick();
@@ -213,4 +232,5 @@ function draw() {
   text("Generation: " + gen, 300, 20);
   text("Best: " + best, 300, 40);
   text("Best This Generation: "+bestthisgen, 300, 60);
+  drawLines(prevscores,[0,0,0]);
 }
