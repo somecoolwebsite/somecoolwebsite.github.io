@@ -188,6 +188,9 @@ function draw() {
     bird.render();
     scores.push(bird.score);
   });
+  if(keyIsDown(82)){
+    currbirds=0;
+  }
   if (currbirds <= 0) {
     var max = curryBirds.reduce(function(prev, current) {
       return (prev.score > current.score) ? prev : current
