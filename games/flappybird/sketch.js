@@ -11,6 +11,8 @@ var best = 0;
 var bestthisgen = 0;
 var prevscores = [];
 var resing = false;
+var speed = 20;
+var sslider;
 
 function pipe() {
   this.x = 500;
@@ -70,7 +72,7 @@ function bird(pc) {
     var ph = this.ph;
     var dfnp = this.distfnpipe;
 
-    this.input = [map(this.distfnpipe, -250, 250, 0, 1), map(this.ph + 50, 0, 500, 0, 1), map(this.ph - 50, 0, 500, 0, 1)];
+    this.input = [map(this.distfnpipe, -250, 250, 0, 1), map(this.ph + 40, 0, 500, 0, 1), map(this.ph - 50, 0, 500, 0, 1)];
     this.train();
     if (!this.pc) {
       //console.log(this.brain.weights);
@@ -175,67 +177,71 @@ function drawLines(data, color) {
 function setup() {
   createCanvas(500, 500);
   initarrays([]);
+  sslider = createSlider(0,100,1);
 }
 
 function draw() {
-  background(140, 216, 237);
-  fill(255);
-  rect(0, 350, 50, 200);
-  rect(50, 410, 50, 200);
-  rect(100, 380, 50, 200);
-  rect(150, 410, 50, 200);
-  rect(200, 400, 50, 200);
-  rect(250, 390, 50, 200);
-  rect(300, 400, 50, 200);
-  rect(350, 370, 50, 200);
-  rect(400, 410, 50, 200);
-  rect(450, 400, 50, 200);
-  stroke(0);
-  strokeWeight(0.8);
-  textSize(50);
-  fill(0);
-  text("Flappy Bird AI", 100, 250);
-  textSize(15);
-  scores = [];
-  curryBirds.forEach(function(bird, i) {
-    // if(mouseIsPressed){
-    //   bird.jump();
-    // }
-    bird.tick();
-    bird.render();
-    scores.push(bird.score);
-  });
-  if (keyIsDown(82)) {
-    currbirds = 0;
-    resing = true;
-  }
-  var genmax = curryBirds.reduce(function(prev, current) {
-    return (prev.score > current.score) ? prev : current
-  });
-  bestthisgen = genmax.score;
-  if (currbirds <= 0) {
-    var max = curryBirds.reduce(function(prev, current) {
+  speed = sslider.value();
+  for (var i = 0; i < speed; i++) {
+    background(140, 216, 237);
+    fill(255);
+    rect(0, 350, 50, 200);
+    rect(50, 410, 50, 200);
+    rect(100, 380, 50, 200);
+    rect(150, 410, 50, 200);
+    rect(200, 400, 50, 200);
+    rect(250, 390, 50, 200);
+    rect(300, 400, 50, 200);
+    rect(350, 370, 50, 200);
+    rect(400, 410, 50, 200);
+    rect(450, 400, 50, 200);
+    stroke(0);
+    strokeWeight(0.8);
+    textSize(50);
+    fill(0);
+    text("Flappy Bird AI", 100, 250);
+    textSize(15);
+    scores = [];
+    curryBirds.forEach(function(bird, i) {
+      // if(mouseIsPressed){
+      //   bird.jump();
+      // }
+      bird.tick();
+      bird.render();
+      scores.push(bird.score);
+    });
+    if (keyIsDown(82)) {
+      currbirds = 0;
+      resing = true;
+    }
+    var genmax = curryBirds.reduce(function(prev, current) {
       return (prev.score > current.score) ? prev : current
     });
-    initarrays(max.brain.weights);
-    currbirds = birdsamt;
-    gen++;
-    if (best < max.score) {
-      best = max.score;
+    bestthisgen = genmax.score;
+    if (currbirds <= 0) {
+      var max = curryBirds.reduce(function(prev, current) {
+        return (prev.score > current.score) ? prev : current
+      });
+      initarrays(max.brain.weights);
+      currbirds = birdsamt;
+      gen++;
+      if (best < max.score) {
+        best = max.score;
+      }
+      prevscores.push(max.score);
+
+
+
     }
-    prevscores.push(max.score);
-
-
-
+    pipes.forEach(function(pipe, i) {
+      pipe.tick();
+      pipe.render();
+    });
+    fill(0);
+    text(scores, 20, 20);
+    text("Generation: " + gen, 300, 20);
+    text("Best: " + best, 300, 40);
+    text("Best This Generation: " + bestthisgen, 300, 60);
+    drawLines(prevscores, [0, 0, 0]);
   }
-  pipes.forEach(function(pipe, i) {
-    pipe.tick();
-    pipe.render();
-  });
-  fill(0);
-  text(scores, 20, 20);
-  text("Generation: " + gen, 300, 20);
-  text("Best: " + best, 300, 40);
-  text("Best This Generation: " + bestthisgen, 300, 60);
-  drawLines(prevscores, [0, 0, 0]);
 }
