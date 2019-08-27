@@ -10,6 +10,7 @@ var gen = 0;
 var best = 0;
 var bestthisgen = 0;
 var prevscores = [];
+var resing = false;
 
 function pipe() {
   this.x = 500;
@@ -204,24 +205,36 @@ function draw() {
     bird.render();
     scores.push(bird.score);
   });
-  if(keyIsDown(82)){
-    currbirds=0;
+  if (keyIsDown(82)) {
+    currbirds = 0;
+    resing = true;
   }
   var genmax = curryBirds.reduce(function(prev, current) {
     return (prev.score > current.score) ? prev : current
   });
-  bestthisgen=genmax.score;
+  bestthisgen = genmax.score;
   if (currbirds <= 0) {
-    var max = curryBirds.reduce(function(prev, current) {
-      return (prev.score > current.score) ? prev : current
-    });
-    initarrays(max.brain.weights);
-    currbirds = birdsamt;
-    gen++;
-    if (best < max.score) {
-      best = max.score;
+    if (resing) {
+      var max = curryBirds.reduce(function(prev, current) {
+        return (prev.score > current.score) ? prev : current
+      });
+      initarrays(max.brain.weights);
+      currbirds = birdsamt;
+    }else{
+      var mmax = curryBirds.reduce(function(prev, current) {
+        return (prev.score > current.score) ? prev : current
+      });
+      initarrays(mmax.brain.weights);
+      currbirds = birdsamt;
+      gen++;
+      if (best < mmax.score) {
+        best = mmax.score;
+      }
+      prevscores.push(mmax.score);
     }
-    prevscores.push(max.score);
+
+
+
   }
   pipes.forEach(function(pipe, i) {
     pipe.tick();
@@ -231,6 +244,6 @@ function draw() {
   text(scores, 20, 20);
   text("Generation: " + gen, 300, 20);
   text("Best: " + best, 300, 40);
-  text("Best This Generation: "+bestthisgen, 300, 60);
-  drawLines(prevscores,[0,0,0]);
+  text("Best This Generation: " + bestthisgen, 300, 60);
+  drawLines(prevscores, [0, 0, 0]);
 }
