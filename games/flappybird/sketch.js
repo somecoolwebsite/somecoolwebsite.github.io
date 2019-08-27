@@ -6,6 +6,8 @@ var birdsamt = 10 + 1; // have to do +1 for player controlled
 var currbirds = birdsamt;
 var g = 0.2;
 var tNoise = 20;
+var gen = 0;
+var best = 0;
 
 function pipe() {
   this.x = 500;
@@ -36,18 +38,24 @@ function bird(pc) {
   this.ph = 0;
   this.brain = new BirdBrain();
   this.train = function() {
-    if (this.y < this.ph-50+random(-tNoise,tNoise)) {
-      this.brain.train(this.input, -1); //-1 MEANS DON'T JUMP !!!!!
-    } else if (this.y > this.ph+50+random(-tNoise,tNoise)) { 
-      this.brain.train(this.input, 1); //1 MEANS JUMP !!!!!
+    if (!this.pc) {
+      if (this.y < this.ph - 50 + random(-tNoise, tNoise)) {
+        this.brain.train(this.input, -1); //-1 MEANS DON'T JUMP !!!!!
+      } else if (this.y > this.ph + 50 + random(-tNoise, tNoise)) {
+        this.brain.train(this.input, 1); //1 MEANS JUMP !!!!!
+      } else {
+        this.brain.train(this.input, -1);
+      }
+      if (this.disfnpipe < 50 + random(-tNoise, tNoise)) {
+        this.brain.train(this.input, -1);
+      }
+    } else {
+      if (keyIsDown(32)) {
+        this.brain.train(this.input, 1);
+      } else {
+        this.brain.train(this.input, -1);
+      }
     }
-    else {
-      this.brain.train(this.input, -1);
-    }
-    if (this.disfnpipe<50+random(-tNoise,tNoise)){
-      this.brain.train(this.input, -1);
-    }
-    
   }
   this.tick = function() {
     this.vel += g;
@@ -58,9 +66,10 @@ function bird(pc) {
     var d = this.dead;
     var ph = this.ph;
     var dfnp = this.distfnpipe;
+
+    this.input = [map(this.distfnpipe, -250, 250, 0, 1), map(this.ph + 50, 0, 500, 0, 1), map(this.ph - 50, 0, 500, 0, 1)];
+    this.train();
     if (!this.pc) {
-      this.input = [map(this.distfnpipe, -250, 250, 0, 1), map(this.ph + 50, 0, 500, 0, 1), map(this.ph - 50, 0, 500, 0, 1)];
-      this.train();
       //console.log(this.brain.weights);
       if (this.brain.out(this.input) === 1) {
         this.jump()
@@ -91,16 +100,20 @@ function bird(pc) {
   this.render = function() {
     if (this.dead) return;
     fill(255, 255, 0);
-    if(this.pc){fill(255,0,0)}
+    if (this.pc) {
+      fill(255, 0, 0)
+    }
     circle(this.x, this.y, 30);
     fill(255);
-    if(this.pc){fill(255,0,0)}
+    if (this.pc) {
+      fill(255, 0, 0)
+    }
     ellipse(this.x - 8, this.y + 3, 20, 10);
     ellipse(this.x + 8, this.y - 3, 10, 10);
     fill(255, 0, 0);
     ellipse(this.x + 12, this.y + 6, 20, 10);
     fill(0);
-    text(this.score, this.x-8, this.y-3);
+    text(this.score, this.x - 8, this.y - 3);
   }
   this.jump = function() {
     this.vel = -5;
@@ -126,11 +139,11 @@ function dnainit(length) {
 function initarrays(weights) {
   curryBirds = [];
   pipes = [];
-  
+
   curryBirds.push(new bird(true));
   for (var i = 0; i < birdsamt - 1; i++) {
     curryBirds.push(new bird(false));
-    if(weights!=[]){
+    if (weights != []) {
       curryBirds[i].brain.setWeights(weights);
     }
   }
@@ -147,19 +160,19 @@ function setup() {
 function draw() {
   background(140, 216, 237);
   fill(255);
-  rect(0,350,50,200);
-  rect(50,410,50,200);
-  rect(100,380,50,200);
-  rect(150,410,50,200);
-  rect(200,400,50,200);
-  rect(250,390,50,200);
-  rect(300,400,50,200);
-  rect(350,370,50,200);
-  rect(400,410,50,200);
-  rect(450,400,50,200);
+  rect(0, 350, 50, 200);
+  rect(50, 410, 50, 200);
+  rect(100, 380, 50, 200);
+  rect(150, 410, 50, 200);
+  rect(200, 400, 50, 200);
+  rect(250, 390, 50, 200);
+  rect(300, 400, 50, 200);
+  rect(350, 370, 50, 200);
+  rect(400, 410, 50, 200);
+  rect(450, 400, 50, 200);
   noStroke();
-  ellipse(50,250,100,50);
-  ellipse(100,250,50,60);
+  ellipse(50, 250, 100, 50);
+  ellipse(100, 250, 50, 60);
   stroke(0);
   strokeWeight(0.8);
   textSize(50);
@@ -181,6 +194,10 @@ function draw() {
     });
     initarrays(max.brain.weights);
     currbirds = birdsamt;
+    gen++;
+    if (best < max.score) {
+      best = max.score;
+    }
   }
   pipes.forEach(function(pipe, i) {
     pipe.tick();
@@ -188,4 +205,6 @@ function draw() {
   });
   fill(0);
   text(scores, 20, 20);
+  text("Generation: " + gen, 350, 20);
+  text("Best: " + best, 350, 40);
 }
