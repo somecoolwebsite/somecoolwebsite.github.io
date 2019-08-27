@@ -8,6 +8,7 @@ var g = 0.2;
 var tNoise = 20;
 var gen = 0;
 var best = 0;
+var bestthisgen = 0;
 
 function pipe() {
   this.x = 500;
@@ -170,9 +171,6 @@ function draw() {
   rect(350, 370, 50, 200);
   rect(400, 410, 50, 200);
   rect(450, 400, 50, 200);
-  noStroke();
-  ellipse(50, 250, 100, 50);
-  ellipse(100, 250, 50, 60);
   stroke(0);
   strokeWeight(0.8);
   textSize(50);
@@ -191,6 +189,10 @@ function draw() {
   if(keyIsDown(82)){
     currbirds=0;
   }
+  var genmax = curryBirds.reduce(function(prev, current) {
+    return (prev.score > current.score) ? prev : current
+  });
+  bestthisgen=genmax.score;
   if (currbirds <= 0) {
     var max = curryBirds.reduce(function(prev, current) {
       return (prev.score > current.score) ? prev : current
@@ -208,6 +210,7 @@ function draw() {
   });
   fill(0);
   text(scores, 20, 20);
-  text("Generation: " + gen, 350, 20);
-  text("Best: " + best, 350, 40);
+  text("Generation: " + gen, 300, 20);
+  text("Best: " + best, 300, 40);
+  text("Best This Generation: "+bestthisgen, 300, 60);
 }
