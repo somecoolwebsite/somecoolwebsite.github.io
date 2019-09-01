@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title><!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+</head>
+<body>
+<script>
+// basic usage: new Markov(lotsOfText).generate()
+// markov chain constructor
+//
+// @string input {example text}
+// @integer len {optional # of words to output}
+// @integer stateSize {optional chain order}
+function Markov( input, len, stateSize ){
+  this.cache = Object.create(null)
+  this.words = input.split(/\s/)
+  this.startwords = [this.words[0]]
+  this.stateSize = stateSize || 2
+  this.outputSize = len || 100
+  this.analyzed = false
+}
+// return a random element from an array
+Markov.prototype.choose = function( arr ){
+  return arr[~~( Math.random() * arr.length )]
+}
+// get the next set of words as a string
+Markov.prototype.getNextSet = function( i ){
+  return this.words.slice(i, i + this.stateSize).join(' ')
+}
+// create a markov lookup
+Markov.prototype.analyze = function( input ){
+  var len = this.words.length, next
+  this.words.forEach(function( word, i ){
+    next = this.getNextSet(++i)
+    ;(this.cache[word] = this.cache[word] || []).push(next)
+    ;/[A-Z]/.test(word[0]) && this.startwords.push(word)
+  }.bind(this))
+  return this.analyzed = true && this
+}
+// generate new text from a markov lookup
+Markov.prototype.generate = function(){
+  var seed, arr, choice, curr, i = 1
+  !this.analyzed && this.analyze()
+  arr = [seed = this.choose(this.startwords)]
+  for ( ; i < this.outputSize; i += this.stateSize ){
+    arr.push(choice = this.choose(curr || this.cache[seed]))
+    curr = this.cache[choice.split(' ').pop()]
+  }
+  return arr.join(' ') + '.'
+}
+document.body.innerHTML = new Markov("You’re the best, Dad. I love you! I’m so proud to be your son. Dad, you’re in all my favorite memories. Dad, you’re still the one I think of first when I have a question about something or when I just need some support and good advice. Thank you for always being there for me. You taught me so many of the important things I know—including a few choice words for certain situations. Thank you for being there every day with just the love and guidance I’ve needed. You’re my one and only dad, and I’ll always have a special place in my heart for you. God gave me such a good gift when he gave me you for a father. You made growing up fun.").generate();
+</script>
+</body>
+</html>
