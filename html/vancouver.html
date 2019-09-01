@@ -1,0 +1,31 @@
+<html>
+    <head>
+      <title>Vancouver Referncing gen</title><!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131001827-2');
+      </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <button onclick="send()">Generate</button>
+        <input type="text" id="txtt" placeholder="Author/organization's name">
+        <input type="text" id="txttt" placeholder="Title of the page">
+        <input type="text" id="txtttt" placeholder="Place of publication">
+        <input type="text" id="txttttt" placeholder="Publisher's name">
+        <input type="text" id="txtttttt" placeholder="Date or year of publication">
+        <input type="text" id="txttttttt" placeholder="yr">
+        <input type="text" id="txtttttttt" placeholder="m">
+        <input type="text" id="txttttttttt" placeholder="d">
+        <input type="text" id="txtttttttttt" placeholder="url">
+        <script>
+        function $(n){return document.getElementById(n);}
+            function send(){
+              document.getElementById("content").innerHTML = $("txtt")+". "+$("txttt")+" [Internet]. "+$("txtttt")+": "+$("txttttt")+"; "+$("txtttttt")+" [Accessed "+$("txttttttt")+" "+$("txtttttttt")+" "+$("txttttttttt")+"; Cited "+$("txttttttt")+" "+$("txtttttttt")+" "+$("txttttttttt")+"]. Avaiable From: "+$("txtttttttttt");
+            }
+        </script>
+    </body>
+</html>
