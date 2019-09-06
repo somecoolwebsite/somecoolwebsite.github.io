@@ -45,7 +45,7 @@ function block(x, y, p) {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth-5, windowHeight-5);
   blks = (windowWidth + windowHeight) / 5;
   player = new block(random(0, 400), 0, 1);
   for (var i = 0; i < blks; i++) {
