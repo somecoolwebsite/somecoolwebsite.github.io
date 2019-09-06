@@ -2,7 +2,7 @@ var blocks = [];
 var player;
 var blks = 0;
 var stage = 1;
-
+//bruh
 function block(x, y, p) {
   this.x = x;
   this.y = y;
