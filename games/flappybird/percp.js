@@ -3,7 +3,7 @@ function BirdBrain(){
   this.weights = [random(-10,10),random(-10,10),random(-10,10)];
   this.output = 0;
   this.bias=-1; //this bias is for optimal output
-  this.learnrate=0.1; // optimal learning rate is 0.1
+  this.learnrate=random(0.01,1); // optimal learning rate is 0.1
   this.active = function(num) {
     if(num>0){return 1}else{return -1}
   }
@@ -23,4 +23,4 @@ function BirdBrain(){
     this.output = this.active((this.inputs[0]+this.weights[0])+(this.inputs[1]+this.weights[1])+this.bias);
     return this.output;
   }
-}
+}  
