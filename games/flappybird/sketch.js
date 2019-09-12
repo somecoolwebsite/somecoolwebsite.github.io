@@ -2,7 +2,7 @@ var curryBirds = [];
 var pipes = [];
 var scores = [];
 var pipesamt = 1;
-var birdsamt = 10 + 1; // have to do +1 for player controlled
+var birdsamt = 100 + 1; // have to do +1 for player controlled
 var currbirds = birdsamt;
 var g = 0.2;
 var tNoise = 20;
@@ -13,6 +13,7 @@ var prevscores = [];
 var resing = false;
 var speed = 20;
 var sslider;
+var birdslider;
 
 function pipe() {
   this.x = 500;
@@ -178,10 +179,12 @@ function setup() {
   createCanvas(500, 500);
   initarrays([]);
   sslider = createSlider(0,100,1);
+  birdslider = createSlider(0,100,1);
 }
 
 function draw() {
   speed = sslider.value();
+  birdsamt = birdslider.value()+1;
   for (var i = 0; i < speed; i++) {
     background(140, 216, 237);
     fill(255);
