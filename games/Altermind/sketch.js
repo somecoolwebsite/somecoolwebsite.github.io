@@ -1,7 +1,7 @@
 var ships = [];
 var shipp = new ship(200, 200, 90, true)
 var socket = io.connect('https://altermind--locknessko.repl.co/');
-
+//brfuh
 function bullet(x, y, ang) {
   this.x = x;
   this.y = y;
