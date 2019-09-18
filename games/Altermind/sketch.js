@@ -1,7 +1,7 @@
-var ships = [];
-var shipp = new ship(200, 200, 90, true)
+var ships = []
 var socket = io.connect('https://altermind--locknessko.repl.co/');
-//brfuh
+var shipp = new ship(200, 200, 90, true, socket.id);
+
 function bullet(x, y, ang) {
   this.x = x;
   this.y = y;
@@ -19,7 +19,8 @@ function bullet(x, y, ang) {
   }
 }
 
-function ship(x, y, ang, pc) {
+function ship(x, y, ang, pc, id) {
+  this.id = id;
   this.x = x;
   this.y = y;
   this.ang = ang;
@@ -53,10 +54,8 @@ function ship(x, y, ang, pc) {
       var offset = createVector(objpos.x - localPos.x, objpos.y - localPos.y);
 
       this.ang = atan2(offset.y, offset.x) - 90;
-      if (keyIsDown(32)) {
-        this.x += this.speed * sin(this.ang);
-        this.y -= this.speed * cos(this.ang);
-      }
+      this.x += this.speed * sin(this.ang);
+      this.y -= this.speed * cos(this.ang);
     }
   }
   this.render = function() {
@@ -79,9 +78,21 @@ function setup() {
   socket.emit('shipnew', shipp);
 }
 
+socket.on('connection', function(data){
+  socket.emit('shipnew', shipp);
+  console.log('connection new!');
+});
+socket.on('disconnect', function(data){
+  ships.splice(ships.indexOf(data),1);
+});
 socket.on('shipnew', function(data) {
-  console.log(data);
-  ships.push(new ship(data.x,data.y,data.ang,false));
+  if(ships.indexOf(data)===-1){
+    ships.push(new ship(data.x, data.y, data.ang, false, data.id));
+  }
+});
+socket.on('shipupdate', function(data) {
+  var ind = ships.find(o => o.id === data.id);
+  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id);
 });
 
 function draw() {
@@ -89,10 +100,9 @@ function draw() {
   text(round(frameRate()), 20, 20);
   shipp.tick();
   shipp.render();
-  socket.emit('shipnew', shipp); 
+  socket.emit('shipupdate', shipp);
   ships.forEach(function(ship, index) {
     ship.tick();
     ship.render();
   });
-  ships = [];
 }
