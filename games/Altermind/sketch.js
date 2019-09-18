@@ -74,7 +74,7 @@ function ship(x, y, ang, pc, id) {
 
 function setup() {
   angleMode(DEGREES);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth-15, windowHeight-15);
   socket.emit('shipnew', shipp);
 }
 
