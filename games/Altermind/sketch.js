@@ -1,6 +1,6 @@
 var ships = []
 var socket = io.connect('https://altermind--locknessko.repl.co/');
-var shipp = new ship(200, 200, 90, true, socket.id);
+var shipp = new ship(200, 200, 90, true, socket.id, []);
 
 function bullet(x, y, ang) {
   this.x = x;
@@ -19,12 +19,12 @@ function bullet(x, y, ang) {
   }
 }
 
-function ship(x, y, ang, pc, id) {
+function ship(x, y, ang, pc, id, b) {
   this.id = id;
   this.x = x;
   this.y = y;
   this.ang = ang;
-  this.bullets = [];
+  this.bullets = b;
   this.pc = pc;
   this.speed = 6;
   this.ls = 4;
@@ -84,16 +84,15 @@ socket.on('connection', function(data){
 });
 socket.on('disconnected', function(data){
   console.log('connection dead: '+data);
-  ships.splice(ships.indexOf(data),1);
 });
 socket.on('shipnew', function(data) {
   if(ships.indexOf(data)===-1){
-    ships.push(new ship(data.x, data.y, data.ang, false, data.id));
+    ships.push(new ship(data.x, data.y, data.ang, false, data.id, data.bullets));
   }
 });
 socket.on('shipupdate', function(data) {
   var ind = ships.find(o => o.id === data.id);
-  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id);
+  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, data.bullets);
 });
 
 function draw() {
