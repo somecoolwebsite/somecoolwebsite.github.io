@@ -82,7 +82,8 @@ socket.on('connection', function(data){
   socket.emit('shipnew', shipp);
   console.log('connection new!');
 });
-socket.on('disconnect', function(data){
+socket.on('disconnected', function(data){
+  console.log('connection dead: '+data);
   ships.splice(ships.indexOf(data),1);
 });
 socket.on('shipnew', function(data) {
