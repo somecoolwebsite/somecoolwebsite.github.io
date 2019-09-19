@@ -91,8 +91,12 @@ socket.on('shipnew', function(data) {
   }
 });
 socket.on('shipupdate', function(data) {
+  var bullarr = [];
+  for(var i=0;i<data.bullets.length;i++){
+    bullarr.push(new bullet(data.bullets[i].x,data.bullets[i].y,data.bullets[i].ang));
+  }
   var ind = ships.find(o => o.id === data.id);
-  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, []);
+  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, bullarr);
 });
 
 function draw() {
