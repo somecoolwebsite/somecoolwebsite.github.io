@@ -87,12 +87,12 @@ socket.on('disconnected', function(data){
 });
 socket.on('shipnew', function(data) {
   if(ships.indexOf(data)===-1){
-    ships.push(new ship(data.x, data.y, data.ang, false, data.id, data.bullets));
+    ships.push(new ship(data.x, data.y, data.ang, false, data.id, []));
   }
 });
 socket.on('shipupdate', function(data) {
   var ind = ships.find(o => o.id === data.id);
-  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, data.bullets);
+  ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, []);
 });
 
 function draw() {
