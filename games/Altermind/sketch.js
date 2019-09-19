@@ -31,17 +31,20 @@ function ship(x, y, ang, pc, id, b) {
   this.hs = 8;
   this.health = 100;
   this.tick = function() {
-
-    for (var i = this.bullets.length - 1; i > 0; i--) {
-      if (dist(this.x, this.y, this.bullets[i].x, this.bullets[i].y) < 10) {
-        this.health--;
+    for (var j = 0; j < ships.length; j++) {
+      for (var i = ships[j].bullets.length - 1; i > 0; i--) {
+        if (dist(this.x, this.y, ships[j].bullets[i].x, ships[j].bullets[i].y) < 10) {
+          this.health--;
+        }
       }
-      this.bullets[i].tick();
-      if (dist(windowWidth / 2, windowHeight / 2, this.bullets[i].x, this.bullets[i].y) > 1000) {
-        this.bullets.splice(i, 1);
-      }
-
     }
+    for (var k = this.bullets.length - 1; k > 0; k--) {
+      this.bullets[k].tick();
+      if (dist(windowWidth / 2, windowHeight / 2, this.bullets[k].x, this.bullets[k].y) > 1000) {
+        this.bullets.splice(k, 1);
+      }
+    }
+
     if (this.pc) {
       if (mouseIsPressed) {
         this.bullets.push(new bullet(this.x + (this.speed * 4) * sin(this.ang), this.y - (this.speed * 4) * cos(this.ang), this.ang));
@@ -56,6 +59,9 @@ function ship(x, y, ang, pc, id, b) {
       this.ang = atan2(offset.y, offset.x) - 90;
       this.x += this.speed * sin(this.ang);
       this.y -= this.speed * cos(this.ang);
+    }
+    if(this.health<=0){
+      shipp = new ship(-100,100,0,false,'dead', []);
     }
   }
   this.render = function() {
@@ -74,26 +80,26 @@ function ship(x, y, ang, pc, id, b) {
 
 function setup() {
   angleMode(DEGREES);
-  createCanvas(windowWidth-15, windowHeight-20);
+  createCanvas(windowWidth - 15, windowHeight - 20);
   socket.emit('shipnew', shipp);
 }
 
-socket.on('connection', function(data){
+socket.on('connection', function(data) {
   socket.emit('shipnew', shipp);
   console.log('connection new!');
 });
-socket.on('disconnected', function(data){
-  console.log('connection dead: '+data);
+socket.on('disconnected', function(data) {
+  console.log('connection dead: ' + data);
 });
 socket.on('shipnew', function(data) {
-  if(ships.indexOf(data)===-1){
+  if (ships.indexOf(data) === -1) {
     ships.push(new ship(data.x, data.y, data.ang, false, data.id, []));
   }
 });
 socket.on('shipupdate', function(data) {
   var bullarr = [];
-  for(var i=0;i<data.bullets.length;i++){
-    bullarr.push(new bullet(data.bullets[i].x,data.bullets[i].y,data.bullets[i].ang));
+  for (var i = 0; i < data.bullets.length; i++) {
+    bullarr.push(new bullet(data.bullets[i].x, data.bullets[i].y, data.bullets[i].ang));
   }
   var ind = ships.find(o => o.id === data.id);
   ships[ships.indexOf(ind)] = new ship(data.x, data.y, data.ang, false, data.id, bullarr);
