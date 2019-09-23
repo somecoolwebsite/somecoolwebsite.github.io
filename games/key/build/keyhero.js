@@ -164,7 +164,6 @@ keyhero.interval = 2500;
 
 keyhero.game = function() {
 
-    if(!keyhero.gameover){
 
         setTimeout(function () {
 
@@ -237,9 +236,5 @@ keyhero.game = function() {
 
         }, keyhero.interval);
 
-    }
-    else{Through
-        return;
-    }
 
 };
