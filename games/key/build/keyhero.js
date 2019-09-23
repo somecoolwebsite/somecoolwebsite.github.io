@@ -7,7 +7,8 @@ keyhero.sounds = ['sound1','sound2','sound3','sound4', 'sound5', 'slide'];
 keyhero.colors = ['#00e500', '#ff0000', '#ffff00', '#0000ff', '#ffa500'];
 keyhero.lives = 1234567898765432345678765432345679876543456789876543456789876543234567;
 keyhero.life = [];
-var speeed = 0.5
+var speeed = 0.5;
+var distt = 7.1;
 
 keyhero.gameover = false;
 var score = document.getElementById("points");
@@ -193,7 +194,7 @@ keyhero.game = function() {
                     note.position.z += speeed;
 
                     //check note hit
-                    if(keyhero.keyPressed[note.x] == 1 && note.position.z >= 7.1){
+                    if(keyhero.keyPressed[note.x] == 1 && note.position.z >= distt){
 
                         keyhero.addScore(20);
 
