@@ -5,7 +5,7 @@ keyhero.notePos = [-2.85, -1.4, 0, 1.4, 2.85];
 keyhero.keyPressed = [0, 0, 0, 0, 0]; // f g h j k
 keyhero.sounds = ['sound1','sound2','sound3','sound4', 'sound5', 'slide'];
 keyhero.colors = ['#00e500', '#ff0000', '#ffff00', '#0000ff', '#ffa500'];
-keyhero.lives = 5;
+keyhero.lives = 1234567898765432345678765432345679876543456789876543456789876543234567;
 keyhero.life = [];
 
 keyhero.gameover = false;
@@ -212,7 +212,6 @@ keyhero.game = function() {
                 else{
                     var slideId = keyhero.sounds[5];
                     document.getElementById(slideId).play();
-		                keyhero.lives -=1;
                     keyhero.scene.remove(keyhero.life[keyhero.lives]);
 
                     keyhero.scene.remove(note);
