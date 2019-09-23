@@ -189,7 +189,7 @@ keyhero.game = function() {
 
                 if(note.position.z <= 7.4) {
                     //move note
-                    note.position.z += .1;
+                    note.position.z += 2;
 
                     //check note hit
                     if(keyhero.keyPressed[note.x] == 1 && note.position.z >= 7.1){
