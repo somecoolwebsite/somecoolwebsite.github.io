@@ -8,7 +8,7 @@ keyhero.colors = ['#00e500', '#ff0000', '#ffff00', '#0000ff', '#ffa500'];
 keyhero.lives = 1234567898765432345678765432345679876543456789876543456789876543234567;
 keyhero.life = [];
 var speeed = 0.5;
-var distt = 7.1;
+var distt = 5;
 
 keyhero.gameover = false;
 var score = document.getElementById("points");
