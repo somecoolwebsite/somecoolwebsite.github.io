@@ -18,7 +18,7 @@
     <div id="output"></div>
     <script>
       function elements(){
-        document.getElementById("output").innerHTML = "<sup>"+document.getElementById("sum").value+"</sup><sub>"+document.getElementById("protons").value+"</sub>"+document.getElementById("symbol").value+"<p>"+document.getElementById("name").value+"-"+document.getElementById("sum").value+"</p><p>Neutrons "+(document.getElementById("sum").value-document.getElementById("protons").value)+"</p>";
+        document.getElementById("output").innerHTML = "<sup>"+document.getElementById("sum").value+"</sup><sub>"+document.getElementById("protons").value+"</sub>"+document.getElementById("symbol").value+"<p>"+document.getElementById("name").value+"-"+document.getElementById("sum").value+"</p><p>Neutrons "+Math.abs(document.getElementById("sum").value-document.getElementById("protons").value)+"</p>";
       }		
     </script>
   </body>
