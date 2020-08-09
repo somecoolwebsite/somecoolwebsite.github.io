@@ -11,6 +11,7 @@
 		</script>
 </head>
 <body>
+	<table id="abc"></table>
 <script> 
 // basic usage: new Markov(lotsOfText).generate()
 
@@ -60,7 +61,7 @@ Markov.prototype.generate = function(){
   }
   return arr.join(' ') + '.'
 }
-document.body.innerHTML = new Markov(unescape(window.location.href.split('?')[1].split('=')[1]),20,1).generate();
+document.getElementById("abc").innerText = new Markov(unescape(window.location.href.split('?')[1].split('=')[1]),20,1).generate();
 </script>
 </body>
 </html>
