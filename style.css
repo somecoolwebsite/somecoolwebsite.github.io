@@ -1,0 +1,27 @@
+* {
+    font-family: 'Nunito', sans-serif;
+    /* color: rgb(232, 255, 250); */
+}
+
+.header {
+    text-align: center;
+    color: rgb(41, 0, 80) !important;
+    background-color: rgb(173, 181, 216);
+    margin: -8px;
+    padding: 0;
+    overflow: hidden;
+    font-size: 40px;
+    height: auto;
+}
+
+body {
+    background-color: rgb(173, 181, 216);
+}
+
+.content {
+    margin: -8px;
+    padding: 8px;
+    text-align: center;
+    background-color: rgb(41, 0, 80);
+    color: rgb(232, 255, 250);
+}
