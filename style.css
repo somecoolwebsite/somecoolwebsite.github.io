@@ -17,6 +17,10 @@ body {
     background-color: rgb(26, 9, 0));
 }
 
+a {
+  color: #f5d1a1;
+}
+
 .content {
     margin: -8px;
     padding: 8px;
