@@ -5,8 +5,7 @@
 
 .header {
     text-align: center;
-    color: rgb(41, 0, 80) !important;
-    background-color: rgb(173, 181, 216);
+    color: rgb(216, 182, 152);
     margin: -8px;
     padding: 0;
     overflow: hidden;
@@ -15,13 +14,13 @@
 }
 
 body {
-    background-color: rgb(173, 181, 216);
+    background-color: rgb(26, 9, 0));
 }
 
 .content {
     margin: -8px;
     padding: 8px;
     text-align: center;
-    background-color: rgb(41, 0, 80);
-    color: rgb(232, 255, 250);
+    background-color: rgb(38, 17, 17);
+    color: rgb(255, 232, 211);
 }
