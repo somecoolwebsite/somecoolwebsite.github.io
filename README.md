@@ -1,6 +1,6 @@
 # somecoolwebsite
 
-I used to store a bunch of cool javascripts at / but now they are at /old
+I used to store a bunch of cool javascripts at / but now they are at /static/old
 
 ## What now
 
