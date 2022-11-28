@@ -13,4 +13,4 @@
 
 <h2>Here is my current profile picture</h2>
 
-<img src="/profile.png">
+<img src="/profile.webp">
