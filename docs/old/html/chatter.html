@@ -1,0 +1,35 @@
+<html>
+    <head><title>A Chatting Application!!!!!!</title><!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script></head>
+    <body>
+        <div id="content"></div>
+        <button onclick="send()">Send</button>
+        <input type="text" id="txtt" placeholder="enter you message!">
+        <script>
+            function httpGet(theUrl)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                xmlHttp.send( null );
+                return xmlHttp.responseText;
+            }
+            function updateContent(){
+                document.getElementById("content").innerHTML = httpGet("https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/msg.html");
+            }
+            document.onkeypress = function(e){if(e.keyCode===13){send();}}
+            setInterval(function(){ updateContent()}, 3000);
+            function send(){
+                var txt = document.getElementById("txtt").value;
+                var randtxt = httpGet("https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg="+txt);
+                updateContent();
+                document.getElementById("txtt").value = "";
+            }
+        </script>
+    </body>
+</html>

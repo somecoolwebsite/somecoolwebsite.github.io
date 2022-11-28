@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <title>jaden dating simulator</title>
+  </head>
+  <body>
+    <h1>jaden dating simulator</h1>
+    <button id="e" onclick="yes()">play pvz multiplayer and ask jaden to play pvz with him in his white van with no windows</button>
+    <button id="no" onclick="no()">communicate with him in any way shape or form other than to play pvz with him in his white van with no windows</button>
+    <script>var win = false;
+var img;
+var z;
+var you;
+var wine;
+
+function setup() {
+  createCanvas(400, 400);
+  img = createImg('https://www.pedestrian.tv/content/uploads/2017/01/skywalkergibbon-619-386.png');
+  img.hide();
+  z = createImg("https://assets.pcmag.com/media/images/417113-plants-vs-zombies-garden-warfare-2-for-pc.jpg");
+  z.hide();
+  you = createImg("https://cdn.images.express.co.uk/img/dynamic/20/590x/secondary/candace-you-1663081.png?r=1550592168259");
+  you.hide();
+  wine = createImg("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbVvAv9JbXIW_vmBcJPPnB9TiRhSu6XnNp7hE09LPQHFKd_w1Z");
+  wine.hide();
+}
+function yes(){alert("YOu WIn!");win=true;}
+function no(){alert("Did you even think you could win by doing that!!?");}
+function draw() {
+  if (!win) {
+    background(220);
+    image(img, 0, 0, 400, 100);
+    image(z, 150, 150, 300, 50);
+    image(you, 0, 300, 400, 100)
+    fill(0)
+    textSize(20)
+    text("hello im jaden and i play plants vs zobeieze", 0, 120);
+  }
+  else{
+    background(255);
+    textSize(69);
+    image(wine, 0,0,400,400); fill(255); text("you win!", 69, 69);
+  }
+}</script>
+  </body>
+</html>

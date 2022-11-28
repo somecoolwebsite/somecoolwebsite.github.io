@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+      //bruh why it not loading
+      var things = [];
+      var r;
+      var thingsamt = 10;
+      var average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
+      var prevscores = [];
+      var avgs = [];
+      var avgscore = 0;
+      var gen = 0;
+
+      function thing() {
+        this.dead = false;
+        this.dna = "";
+        this.num = 100;
+        this.init = function() {
+          this.dna = dnainit(this.num);
+        }
+        this.x = window.innerWidth / 2;
+        this.y = 200;
+        this.score = 0;
+        this.i = 0
+        this.update = function() {
+          rect(this.x, this.y, 30, 30);
+          text(this.score, this.x, this.y);
+          this.score = abs(round(dist(this.x, this.y, window.innerWidth, 400)));
+          if (this.y <= 100 || this.y >= 300 || this.x >= window.innerWidth - 200) {
+            this.score = 0;
+            //this.dead = true
+          } //this defines obstacles!!!
+        }
+        this.add = function(new_dna, new2) {
+          this.gendna = dnainit(this.dna.length).split('');
+          this.gendna2 = dnainit(this.dna.length).split('');
+          this.spldna = new2.split('');
+          this.splnewdna = new_dna.split('');
+          this.ndnastring = "";
+          for (var bruh = 0; bruh < this.dna.length; bruh++) {
+            this.ndnastring = this.ndnastring + this.spldna[bruh];
+            this.ndnastring = this.ndnastring + this.gendna[bruh];
+            this.ndnastring = this.ndnastring + this.gendna2[bruh];
+            this.ndnastring = this.ndnastring + this.splnewdna[bruh];
+          }
+          this.dna = this.ndnastring;
+        }
+        this.reset = function() {
+          this.x = window.innerWidth / 2;
+          this.y = 200;
+          this.i = 0;
+          this.num = this.dna.length;
+        }
+        this.move = function() {
+          if (this.i <= this.dna.length) {
+            if (this.dead === false) {
+              switch (this.dna.split("")[this.i]) {
+                case "u":
+                  this.y -= 10
+                  break
+                case "d":
+                  this.y += 10
+                  break
+                case "l":
+                  this.x -= 10
+                  break
+                case "r":
+                  this.x += 10
+                  break
+              }
+            }
+            this.i++;
+          } else {
+            reset()
+          }
+        }
+      }
+
+      function dnainit(length) {
+        var result = '';
+        var characters = 'udlr';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+      }
+
+      function setup() {
+        createCanvas(window.innerWidth, 400);
+        for (var i = 0; i < thingsamt; i++) {
+          things.push(new thing());
+          things[i].init()
+        }
+        //frameRate(100); //this specifies the simulation rate (not really learning rate)
+      }
+
+      function drawLines(data, color) {
+        stroke(0);
+        // draw lines
+        let px = 0;
+        let py = data[0];
+        for (let i = 0; i < data.length; i++) {
+          let x = i * (width / (data.length - 1));
+          let y = data[i] / 10;
+          stroke(color[0], color[1], color[2]);
+          line(px, py, x, y);
+          stroke(0, 0, 0)
+          //store the last position
+          px = x;
+          py = y;
+        }
+      }
+
+      function reset() {
+        r = true;
+      }
+
+      function draw() {
+        background(220);
+
+        rect(0, 0, window.innerWidth, 100);
+        rect(0, 300, window.innerWidth, 100);
+        text("Average Score: " + avgscore, 20, 20);
+        text("Best Score: " + prevscores.sort()[prevscores.length - 1], 20, 40);
+        text("Generation: " + gen, 300, 20);
+        for (var i = 0; i < thingsamt; i++) {
+          things[i].update();
+          things[i].move();
+        }
+        if (r === true) {
+          r = false;
+          var max = things.reduce(function(prev, current) {
+            return (prev.score > current.score) ? prev : current
+          });
+          things.sort((a, b) => (a.score > b.score) ? 1 : -1);
+          max2 = things[1];
+          things = [];
+          prevscores.push(max.score);
+          avgscore = average(prevscores);
+          avgs.push(avgscore);
+          console.log("Average Score: " + avgscore);
+          console.log("Best This Gen: " + max.score);
+          for (var j = 0; j < thingsamt; j++) {
+            things.push(new thing());
+            things[j].init();
+            things[j].add(max.dna, max2.dna);
+          }
+          gen++;
+
+        }
+        drawLines(prevscores, [0, 0, 0]);
+        drawLines(avgs, [255, 0, 0]);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+#blockwrapthing{
+  text-align: left;
+}
+#epic{
+  font-family: 'Roboto Mono', cursive;
+  color: white;
+}
+body {
+  background-color: black;
+}
+pre {
+  color: white;
+  font-family: cursive;
+}
+a {
+  color: lightblue;
+}

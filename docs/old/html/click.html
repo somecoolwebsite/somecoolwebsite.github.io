@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+click themillk
+
+<div id="click">
+       _________<br>
+  | _______ |<br>
+ / \         \<br>
+/___\_________\<br>
+|   | \       |<br>
+|   |  \      |<br>
+|   |   \     |<br>
+|   | M  \    |<br>
+|   |     \   |<br>
+|   |\  I  \  |<br>
+|   | \     \ |<br>
+|   |  \  L  \|<br>
+|   |   \     |<br>
+|   |    \  K |<br>
+|   |     \   |<br>
+|   |  \  |<br>
+|___|_______\_|<br>
+</div>
+<p id="clicks"></p>
+<br>clicks per second<p id="cps"></p>
+<button id="clicker">buy autoclicker</button>
+<script>
+var clks = 0;
+var int = setInterval(function(){},1000);
+var intm = 5000;
+function $(n){return document.getElementById(n)}
+$('click').addEventListener('click', function(){
+	clks++;
+    $('clicks').innerText = clks;
+});
+$('clicker').addEventListener('click', function(){
+	$('cps').innerText = intm;
+	clearInterval(int);
+    int = setInterval(function(){
+    	$('click').click();
+    },intm);
+    intm-=10;
+});
+</script>
+</body>
+
+</html>

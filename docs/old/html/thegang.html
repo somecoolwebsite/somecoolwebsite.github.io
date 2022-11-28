@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>the === gang 👨🏿‍🦳</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+    <style>
+      body {
+        font-family: 'Baloo Bhai', cursive;
+      }
+      input {
+        display: block;
+        border: 2px solid grey;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h2>the === gang: for javascript brain pain</h2></header>
+    <input type="text" id="name" placeholder="Name">
+    <br>
+    <input type="text" style="width: 175px; height: 200px;" id="content" placeholder="Whatever u want" onkeypress="return runScript(event)">
+    <br>
+    <button onclick="send();">Send</button>
+    <br>
+    <p>there was a lot of brain pain involve in making this! i very dislike CORS, but, I like epic bypasscors.herokuapp.com. Now with enter!</p>
+    <hr>
+    <div id="display">
+    </div>
+    <script>
+      receive();
+			function runScript(e) {
+					//See notes about 'which' and 'key'
+					if (e.keyCode == 13) {
+							send()
+					}
+			}
+			
+      function rep(str, search, replacement) {
+				return str.split(search).join(replacement);
+			}
+      function httpGet(theUrl)
+      {
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.open( "GET", theUrl, false); // false for synchronous request
+          xmlHttp.send( null );
+          return xmlHttp.responseText;
+      }
+      document.onkeypress = function(e){if(e.keycode===13){send();}};
+      function receive(){
+        document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");
+      	
+      }
+      window.onload = function(){
+      setInterval(function(){document.getElementById("display").innerHTML = rep(httpGet("https://bypasscors.herokuapp.com/api/?url=https://thegang--locknessko.repl.co/messages"), "%20", " ");}, 3000);
+      }
+      function send(){
+       fetch("https://thegang--locknessko.repl.co/update?msg="+document.getElementById("content").value+"&e="+document.getElementById("name").value+"");
+      	document.getElementById("content").value = "";
+      }
+    </script>
+  </body>
+</html>

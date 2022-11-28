@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Meet The Elements</title><!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script> 
+  </head> 
+  <body>
+    <button onclick="elements()">Get the element!</button><p></p>
+    <input id="sum" placeholder="Mass Number" type="text"><p></p>
+    <input id="symbol" placeholder="Element Symbol" type="text"><p></p>
+    <input id="protons" placeholder="Atomic Number" type="text"><p></p>
+    <input id="name" placeholder="Element Name" type="text"><p></p>
+    <div id="output"></div>
+    <script>
+      function elements(){
+        document.getElementById("output").innerHTML = "<sup>"+document.getElementById("sum").value+"</sup><sub>"+document.getElementById("protons").value+"</sub>"+document.getElementById("symbol").value+"<p>"+document.getElementById("name").value+"-"+document.getElementById("sum").value+"</p><p>Neutrons "+Math.abs(document.getElementById("sum").value-document.getElementById("protons").value)+"</p>";
+      }		
+    </script>
+  </body>
+</html>
