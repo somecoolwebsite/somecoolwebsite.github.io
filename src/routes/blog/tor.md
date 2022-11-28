@@ -1,10 +1,9 @@
-# Tor
-
-\> Mar 26, 2022
+---
+title: "Tor"
+date: "tbd"
+---
 
 # NOT FINISHED check back later
-
----
 
 This post is about how I setup, and use #torforgood. 
 

@@ -1,4 +1,7 @@
-# Discord server security
+---
+title: Discord server security
+date: "sometime"
+---
 
 ## TL;DR
 
