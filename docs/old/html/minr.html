@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+  </head>
+  <body>
+    <script>
+      let p = new gameObject(200, 300, 10, 10, "p");
+      let m;
+      let inv = [0, 0, 0];
+      let bl = [];
+      var cs = 0;
+      var build = false;
+
+
+      /*
+      ==========================
+
+
+
+
+      NOT UPLOADED TO GITHUB!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+      ==========================
+      */
+
+      document.body.style = "margin:0px;";
+
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      function setup() {
+        createCanvas(750, 600);
+        m = new gameObject(mouseX,mouseY,10, 10,"");
+        for (i = 0; i < window.innerWidth/10; i++) {
+          bl.push(new gameObject(i * 10,height-10, 10, 10, 0));
+          bl.push(new gameObject(i * 10,height-20, 10, 10, 0));
+          bl.push(new gameObject(i * 10,height-30, 10, 10, 0));
+          bl.push(new gameObject(i * 20,height-40, 10, 10, 0));
+        }
+      }
+
+      function gameObject(x, y, width, height, type) {
+        this.x = x;
+        this.y = y;
+        this.acc = 0;
+        this.type = type;
+        this.width = width;
+        this.height = height;
+        this.update = function() {
+          push();
+          translate(this.x, this.y);
+          if(this.type==='p'){
+            fill('red');
+          }
+          else if(this.type===0){
+            stroke('green');
+            fill('brown');
+          }
+          else if(this.type===2){
+            stroke('red');
+            fill('brown');
+          }
+          else{
+            fill('black');
+          }
+          rect(0, 0, this.width, this.height);
+          pop();
+          if (this.type === "p") {
+            for(i=0;i<10;i++){
+              this.y += this.acc-0.3;
+              this.force();
+            }
+            this.acc += 0.4;
+          }
+        }
+        this.collision = function(o) {
+          var myleft = this.x;
+          var myright = this.x + (this.width);
+          var mytop = this.y;
+          var mybottom = this.y + (this.height);
+          var hit = true;
+          if ((mybottom < o.y) || (mytop > (o.y+o.height)) || (myright < o.x) || (myleft > (o.x+o.width))) {
+            hit = false;
+          }
+          return hit;
+        }
+        this.force = function(){
+          for(i=0;i<bl.length;i++){
+            if(this.collision(bl[i])){
+              if(this.acc>=0){
+                this.acc=0;
+              }
+              if(this.y+this.height>=bl[i].y){
+                 this.y--;
+              }
+            }
+          }
+        }
+      }
+
+      function draw() {
+        background(220);
+        if (keyIsDown(65)) {
+          p.x -= 3;
+        }
+        if (keyIsDown(68)) {
+          p.x += 3;
+        }
+        if (keyIsDown(87)) {
+          p.acc=-3;
+        }
+        p.force();
+        p.update();
+        m.x = mouseX;
+        m.y = mouseY;
+        m.update();
+
+        //===========================
+        //UI
+        build=true;
+        if(build){
+          for(var i=0;i<bl.length;i++){
+           if(dist(bl[i].x,bl[i].y,p.x,p.y)<=30&&bl[i].type===2){
+
+             rect(100,100,400,400);
+             inv[1]++;
+           }
+          }
+        }
+
+        for(var i=0;i<inv.length;i++){
+          text(inv[i],i*50 + 30,30);
+          text("slot: "+i, i*50+30, 40);
+        }
+
+        text(cs, 30, 60);
+
+        //===========================
+        if(mouseIsPressed&&(mouseButton == RIGHT)){
+          if(inv[cs]>=1){
+            bl.push(new gameObject(mouseX,mouseY, 10, 10, cs));
+            inv[cs]--;
+          }
+        }
+        for (i = 0; i < bl.length; i++) {
+          bl[i].update();
+          if(m.collision(bl[i])&&mouseIsPressed&&(mouseButton == LEFT)){
+            bl.splice(i,1);
+            inv[cs]++;
+          }
+
+        }
+      }
+
+      function mouseWheel() {
+        cs += 1;
+        if(cs>=inv.length){
+           cs=0;
+        }
+      }
+    </script>
+  </body>
+</html>

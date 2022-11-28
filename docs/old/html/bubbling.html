@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+      var aacc;
+      var avel;
+      var acc;
+      var ground;
+      var pos;
+      var ang = 0;
+      var ded = false;
+      var game = false;
+      var number = 0;
+
+      var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
+
+      function land(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.render = function() {
+          rect(this.x, this.y, this.w, this.h);
+        }
+      }
+
+      function c(x, y, w, h, xx, yy, ww, hh) {
+        var crash = false;
+        if (dist(x, y, xx, yy) < 25) {
+          crash = true;
+        }
+        return crash;
+      }
+
+      function setup() {
+        ground = new land(200, 395, 400, 10);
+        acc = createVector(0, 0);
+        vel = createVector(0, 0);
+        aacc = createVector(0, 0);
+        avel = createVector(0, 0);
+        pos = createVector(200, 200);
+        createCanvas(400, 400);
+        rectMode(CENTER);
+      }
+
+      function render() {
+        fill(190);
+        ground.render();
+        fill(255, 0, 0);
+        if (ded) {
+          text("         have exploded", pos.x, pos.y);
+          fill(251, 255, 0);
+          rect(pos.x, pos.y, 50, 50);
+        }
+        push();
+        translate(pos.x, pos.y);
+        rotate(ang);
+
+        rect(0, 0, 40, 40);
+        pop();
+      }
+
+      function tick() {
+        if (keyIsDown(38) || mouseIsPressed) {
+          acc.y += -0.005;
+        } else {
+          acc.y += 0.01;
+        }
+        text(Math.floor((acc.y + acc.y) * 100) + "", 10, 20);
+        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && c(pos.x, pos.y, 40, 40, ground.x, ground.y)) || (c(pos.x, pos.y, 40, 40, ground.x, ground.y) && (acc.x + acc.y) >= 0.5)) {
+          ded = true;
+        }
+        if (c(pos.x, pos.y, 40, 40, ground.x, ground.y)) {
+          acc.y = 0;
+        }
+        if (ded) {
+          return;
+        }
+        if (mouseIsPressed && mouseX > 200 || keyIsDown(39)) {
+          ang += 0.01;
+        } else if (mouseIsPressed && mouseX < 200 || keyIsDown(37)) {
+          ang -= 0.01;
+        }
+        pos.add(acc);
+      }
+
+      function draw() {
+        background(220);
+        if (game) {
+          tick();
+          render();
+        }
+        else {
+          textSize(20);
+          text("Game Will Start In:", 200-80,200);
+          textSize(70);
+          text(number, 200-20,270);
+        }
+      }
+
+      socket.on('g_start_time', function(data){
+        number=data;
+      });
+    </script>
+  </body>
+</html>

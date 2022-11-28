@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Moon Battle Royale</title>
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+      var aacc;
+      var avel;
+      var acc;
+      var ground;
+      var pos;
+      var ang = 0;
+      var ded = false;
+      var game = false;
+      var lander;
+      var moon;
+      var explosion;
+      var fuel = 100;
+      var landed = false;
+      var number = 0;
+      var people = [];
+      var g_pend_render = [];
+      var online = 0;
+      var debug;
+      var socket = io.connect('Moon-Battle-Royale--locknessko.repl.co');
+      
+      function land(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.render = function() {
+          image(moon,this.x, this.y, this.w, this.h);
+        }
+      }
+      function c(x, y, w, h, xx, yy, ww, hh) {
+        var crash = false;
+        if (dist(x, y, xx, yy) < 25) {
+          crash = true;
+        }
+        return crash;
+      }
+      function reset(){
+        ang = 0;
+        ded = false;
+        game = true;
+        fuel = 100;
+        landed = false;
+        number = 0;
+        g_pend_render = [];
+        online = 0;
+        acc = createVector(0, 0);
+        vel = createVector(0, 0);
+        aacc = createVector(0, 0);
+        avel = createVector(0, 0);
+        pos = createVector(Math.floor((Math.random() * 400) + 1), 200);
+      }
+      function setup() {
+        explosion = loadImage('https://somecoolwebsite.github.io/html/images/explosion.png');
+        lander = loadImage('https://somecoolwebsite.github.io/html/images/kisspng-apollo-lunar-module-apollo-program-lander-moon-cli-module-icon-5b3fcbfbe67b16.2145793315309076439441.png');
+        moon = loadImage('https://somecoolwebsite.github.io/html/images/moon-surface-clipart__k8448360.jpg');
+        ground = new land(200, 240, 800, 400);
+        acc = createVector(0, 0);
+        vel = createVector(0, 0);
+        aacc = createVector(0, 0);
+        avel = createVector(0, 0);
+        pos = createVector(Math.floor((Math.random() * 400) + 1), 200);
+        createCanvas(550, 400);
+        rectMode(CENTER);
+        imageMode(CENTER);
+        debug = createDiv('');
+      }
+      function render() {
+        background(500);
+        fill(190);
+        ground.render();
+        fill(255, 0, 0);
+        if (ded) {
+          text("         have exploded", pos.x, pos.y);
+          fill(251, 255, 0);
+          image(explosion, pos.x, pos.y, 50, 50);
+        }
+        push();
+        translate(pos.x, pos.y);
+        rotate(ang);
+        if(!ded){
+          image(lander, 0, 0, 40, 40);
+        }
+        pop();
+        
+        for(var i=0;i<g_pend_render.length;i++){
+          if(!ded){
+            if(c(pos.x, pos.y, 40, 40, g_pend_render[i][0], g_pend_render[i][1], 30, 30)){
+              ded=true;
+              setTimeout(function(){
+                reset();
+              },1000);
+            }
+          }
+          push();
+          translate(g_pend_render[i][0], g_pend_render[i][1]);
+          image(lander, 0, 0, 30, 30);
+          pop();
+          g_pend_render.splice(i,1);
+        }
+        textSize(20);
+        text("Velocity: " + Math.floor((acc.y) * 10), 20, 20);
+        text("Max Velocity: 7", 140, 20);
+        text("FPS " + Math.floor(frameRate()), 20, 50);
+        text("Online: " + online, 140, 50);
+      }
+      function tick() {
+        if (keyIsDown(38) || mouseIsPressed) {
+          acc.y += -0.005;
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
+        } else {
+          acc.y += 0.01;
+        }
+        text(Math.floor((acc.y + acc.y) * 100) + "", 10, 20);
+        if(!ded){
+        if (((ang * 180 / Math.PI <= -10 || ang * 180 / Math.PI >= 10) && pos.y >= 370) || (pos.y >= 370 && (acc.y) >= 0.75)) {
+          ded = true;
+          setTimeout(function(){
+            reset();
+          },1000);
+        }}
+        if (ded) {
+          return;
+        }
+        if (mouseIsPressed && mouseX > 200 || keyIsDown(39)) {
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
+          ang += 0.01;
+          acc.x += 0.1;
+        } else if (mouseIsPressed && mouseX < 200 || keyIsDown(37)) {
+          fill(255,0,0);
+          rect(pos.x,pos.y, 20,20);
+          ang -= 0.01;
+          acc.x -= 0.1;
+        }
+        if (pos.y >= 370) {
+          if(!landed){
+            setTimeout(function(){
+              reset();
+            },1000);
+          }
+          landed = true;
+          acc.y = 0;
+          acc.x = 0;
+          ang = 0;
+        }
+        pos.add(acc);
+        if(!landed){
+          socket.emit('g_player_pos', [pos.x, pos.y]);
+        }
+      }
+      function logg(l){
+        console.log("LOG - "+new Date().toLocaleTimeString()+": "+l);
+        debug.elt.innerHTML="<p>LOG - "+new Date().toLocaleTimeString()+": "+l+"</p>"+debug.elt.innerHTML
+      }
+      function draw() {
+        if (game) {
+          tick();
+          render();
+        } else {
+          background(220);
+          textSize(20);
+          text("Online: " + online, 140, 50);
+          text("Game Will Start In:", 200 - 80, 200);
+          textSize(70);
+          text(number, 200 - 20, 270);
+        }
+      }
+      socket.on('g_stats_people', function(data) {
+        online = data;
+      });
+      socket.on('g_player_leave', function(data) {
+        var peopleindex = people.indexOf(data);
+        people.splice(peopleindex, 1);
+        online = people.length;
+      });
+      socket.on('g_player_join', function(data) {
+        people.push(data);
+        online = people.length;
+      });
+      socket.on('g_player_pos', function(data) {
+        g_pend_render.push(data);
+        rect(data[0], data[1], 30, 30);
+      });
+      socket.on('g_start_game', function(data) {
+        game = true;
+      });
+      socket.on('g_start_time', function(data) {
+        number = data;
+      });
+    </script>
+  </body>
+</html>

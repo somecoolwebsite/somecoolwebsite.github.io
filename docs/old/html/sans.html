@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head><!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+		<script>
+			var player;
+var sans;
+var obstacles = [];
+
+function startGame() {
+    obstacles = [];
+    gameArea.start();
+    gameArea.clear();
+    player = new component(30, 30, "red", 10, 120);
+}
+var state = "walk";
+//Random code for it to work
+window.addEventListener('load', function load(event){
+  startGame();
+});
+//end work
+
+var gameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 500;
+        this.canvas.height = 500;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+				this.interval = setInterval(updateGameArea, 20);
+        this.frameNo = 0;
+				window.addEventListener('keydown', function (e) {
+      		gameArea.keys = (gameArea.keys || []);
+      		gameArea.keys[e.keyCode] = true;
+    		})
+    		window.addEventListener('keyup', function (e) {
+      		gameArea.keys[e.keyCode] = false; 
+    		})
+		},
+		clear : function() {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.context.fillStyle = "black";
+      this.context.fillRect(0,0,this.canvas.width,this.canvas.height)
+  	},
+    restart : function() {
+      clearInterval(this.interval);
+      startGame();
+    }
+}
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+		this.speedX = 0;
+		this.speedY = 0;
+    this.x = x;
+    this.y = y;    
+		this.update = function(){
+    	ctx = gameArea.context;
+    	ctx.fillStyle = color;
+    	ctx.fillRect(this.x, this.y, this.width, this.height);
+		}
+		this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+		this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function leftSlide(){
+  var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+  for (i = 0; i < obstacles.length; i += 1) {
+    if (player.crashWith(obstacles[i])) {
+      score=0;
+      gameArea.restart();
+      return;
+    } 
+  }
+  gameArea.clear();
+	gameArea.frameNo += 3;
+	if (gameArea.frameNo == 1 || everyinterval(150)) {
+		x = gameArea.canvas.width;
+		minHeight = 20;
+		maxHeight = window.innerHeight-30;
+		height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+		minGap = 50;
+		maxGap = 200;
+		gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+		obstacles.push(new component(10, height, "white", x, 0));
+		obstacles.push(new component(10, x - height - gap, "white", x, height + gap));
+	}
+	for (i = 0; i < obstacles.length; i += 1) {
+		obstacles[i].x += -3;
+		obstacles[i].update();
+	}
+}
+
+function rightSlide(){
+  var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+  for (i = 0; i < obstacles.length; i += 1) {
+    if (player.crashWith(obstacles[i])) {
+      score=0;
+      gameArea.restart();
+      return;
+    } 
+  }
+  gameArea.clear();
+	gameArea.frameNo += 3;
+	if (gameArea.frameNo == 1 || everyinterval(150)) {
+		x = 0;
+		minHeight = 20;
+		maxHeight = window.innerHeight-30;
+		height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+		minGap = 50;
+		maxGap = 200;
+		gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+		obstacles.push(new component(10, height, "white", x, 0));
+		obstacles.push(new component(10, gameArea.canvas.width-height - gap, "white", x, height + gap));
+	}
+	for (i = 0; i < obstacles.length; i += 1) {
+		obstacles[i].x += 3;
+    obstacles[i].update();
+    if(obstacles[i].x <= 0){
+      obstacles.splice(i,1);
+    }
+	}
+}
+
+function walk(){
+  gameArea.clear();
+  this.ctx = gameArea.context;
+  sans = new component(40,40,"white",250,250);
+  sans.update();
+  ctx.fillStyle = "black";
+  ctx.fillText("sans", sans.x+10,sans.y+10);
+  if(sans.crashWith(player)){
+    state = "fight";
+  }
+}
+
+var score = 0;
+
+function updateGameArea() {
+  if(state=="fight"){
+    score++;
+    if(score<=500){
+      leftSlide();
+    }
+    else if (score>=500&&score<=1000){
+      rightSlide();
+    }
+    else if (score>=1000){
+      state="walk";
+      score=0;
+    }
+    
+    var audio = new Audio('mega.mp3');
+    audio.play();
+  }
+  if(state=="walk"){
+    walk();
+  }
+	player.speedX = 0;
+	player.speedY = 0;
+	if (gameArea.keys && gameArea.keys[37]) {player.speedX = -5; }
+  if (gameArea.keys && gameArea.keys[39]) {player.speedX = 5; }
+  if (gameArea.keys && gameArea.keys[38]) {player.speedY = -5; }
+  if (gameArea.keys && gameArea.keys[40]) {player.speedY = 5; }
+	player.newPos();
+  player.update();
+}
+
+function everyinterval(n) {
+    if ((gameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+		</script>
+	</head>
+  <body>
+		
+  </body>
+</html>

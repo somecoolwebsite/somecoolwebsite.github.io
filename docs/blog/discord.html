@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/_layout-985a1069.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page-cc4ed907.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/start-70cedac5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index-fd23df92.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons-63d3d646.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper-9b728935.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-c326c751.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/_layout.ts-b8ee4d7c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout-1daba58d.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/blog/_id_/_page.svelte-b9f3e1d6.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/blog/_id_/_page.ts-aa22a930.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_page-2bf9b660.js">
+	</head>
+	<body>
+		<div style="display: contents">
+
+
+<header class="svelte-12e77qa"><a href="/" class="svelte-12e77qa">Home</a>
+
+  <nav><ul class="svelte-12e77qa"><li><a href="/blog" class="svelte-12e77qa">Blog</a></li>
+      <li><a href="/about" class="svelte-12e77qa">About</a></li>
+      <li><a href="/contact" class="svelte-12e77qa">Contact</a></li></ul></nav>
+</header>
+
+<main><article><h1 class="svelte-7aimqn">Discord server security</h1>
+  <p>Published: sometime</p>
+  <hr>
+  <div class="main-post"><h2>TL;DR</h2>
+<p>Discord is has very poorly secured defaults (minimal security). This allows even the largest or partnered servers to be nuked, spammed, trolled or phished with minimal effort (although it is a bit harder on larger servers).</p>
+<h2>What are the defaults?</h2>
+<p>When you create a standard server (select for a club or a community) this is what you get:</p>
+<p><img src="https://user-images.githubusercontent.com/42625905/156919319-00ed0ef6-aa9b-491c-9936-5f7966502251.png" alt="image"></p>
+<p>A text channel and a voice channel.</p>
+<h3>Default user permissions</h3>
+<p>By default there are two big settings, @everyone and @here permissions. By default these are on allowing anyone who joins to wreck havoc:</p>
+<p><img src="https://user-images.githubusercontent.com/42625905/156919369-962c96c8-38e4-4de5-bc52-7e917bffc539.png" alt="image"></p>
+<p>There is also no user screening, auto-moderation or roles (allowing for new users to have lower permissions such as slow mode etc.)</p></div>
+</article></main>
+
+
+		<script type="module" data-sveltekit-hydrate="11bkpup">
+			import { start } from "../_app/immutable/start-70cedac5.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 5],
+					params: {id:"discord"},
+					route: {"id":"/blog/[id]"},
+					data: [null,null],
+					form: null
+				},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="11bkpup"]').parentNode,
+				version: "1669628023989"
+			});
+		</script>
+	</div>
+	</body>
+</html>

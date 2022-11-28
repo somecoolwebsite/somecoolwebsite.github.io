@@ -1,0 +1,24 @@
+<html>
+    <head><title>an uwufier</title></head>
+    <body>
+        <div id="content"></div>
+        <button onclick="send()">Uwufy</button>
+        <input type="text" id="txtt" placeholder="enter you message!">
+        <script>
+            
+
+            document.onkeypress = function(e){if(e.keyCode===13){send();}};
+
+            function send(){
+                var txt = document.getElementById("txtt").value;
+                var randtxt = "https://cors-anywhere.herokuapp.com/https://sleepy-falls-61435.herokuapp.com/update?msg=";
+                var str = txt.replace("l","w");
+                for (var i = 0; i < str.length; i++) {
+                   if(str.charAt(i)==="l"||str.charAt(i)==="L"){str.replace("l","w");str.replace("L","W");}
+                }
+                str = str.replace("l","w");
+                document.getElementById("txtt").value = str;
+            }
+        </script>
+    </body>
+</html>

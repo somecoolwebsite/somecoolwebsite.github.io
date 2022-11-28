@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/_layout-985a1069.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page-cc4ed907.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/start-70cedac5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index-fd23df92.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons-63d3d646.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper-9b728935.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-c326c751.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/_layout.ts-b8ee4d7c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout-1daba58d.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/blog/_id_/_page.svelte-b9f3e1d6.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/blog/_id_/_page.ts-aa22a930.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_page-2bf9b660.js">
+	</head>
+	<body>
+		<div style="display: contents">
+
+
+<header class="svelte-12e77qa"><a href="/" class="svelte-12e77qa">Home</a>
+
+  <nav><ul class="svelte-12e77qa"><li><a href="/blog" class="svelte-12e77qa">Blog</a></li>
+      <li><a href="/about" class="svelte-12e77qa">About</a></li>
+      <li><a href="/contact" class="svelte-12e77qa">Contact</a></li></ul></nav>
+</header>
+
+<main><article><h1 class="svelte-7aimqn">OP1 firmware reverse engineering</h1>
+  <p>Published: sometime</p>
+  <hr>
+  <div class="main-post"><h2>&gt; DISCLAIMER</h2>
+<p>I don’t mean to cause any trouble with teenage engineering. I do not work for them and I have nothing to do with them other than that I think they make cool musical instruments.</p>
+<h2>&gt; TL;DR</h2>
+<p>This is just a WIP that i’ll update periodically on my findings from reverse engineering the teenage engineering op-1</p>
+<ul><li>How does it work<ul><li><p>The OP1 uses sqlite at it’s core!</p>
+<p><img src="https://user-images.githubusercontent.com/42625905/164894645-f9d8b06e-ca27-412a-8076-1cba98923270.png" alt="sql commands seen in a firmware binary"></p></li></ul></li></ul>
+<h2>How I got started</h2>
+<p>I got interested coz I want an OP1 but it costs a lot of money and the firmware is not open source. </p>
+<h3>&gt; Building the toolchain</h3>
+<p>When you go to <a href="https://teenage.engineering/downloads/op-1" rel="nofollow">eenage engineering’s op1 firmware download page</a> it looks like this:</p>
+<p><img src="https://user-images.githubusercontent.com/42625905/164894773-97804b46-4299-4666-8c19-8721e968e58c.png" alt="image"></p>
+<p>It only gives you instructions on how to flash the firmware to the OP1 and no clues as to how the image is built.</p>
+<h3>$ Final toolchain</h3>
+<pre class="language-make"><!-- HTML_TAG_START --><code class="language-make">
+extract: clean
+	# Remove the first 4 bytes (apparently checksum?)
+	dd if=op1_243.op1 of=staging/truncated.bin bs=1 skip=4
+
+	# Use the decompressor from here (https://github.com/frizb/FirmwareReverseEngineering/blob/master/LZMADecompress.py) to convert the lzma compressed data to a tar archive
+	python3 decomp.py -input staging/truncated.bin -output staging/tar.bin
+
+	# Untar the archive
+	cd extractedfs &amp;&amp; cp ../staging/tar.bin ./tar.bin &amp;&amp; tar xvf ./tar.bin &amp;&amp; rm ./tar.bin &amp;&amp; cd ..
+
+clean:
+	-rm -r staging/*
+	-sudo rm -r extractedfs/*</code><!-- HTML_TAG_END --></pre>
+<h3>&gt; random interesting things</h3>
+<p><img src="https://user-images.githubusercontent.com/42625905/164894849-186ef591-d035-4079-84c4-d75308b8cb21.png" alt="image"></p></div>
+</article></main>
+
+
+		<script type="module" data-sveltekit-hydrate="10s7w4w">
+			import { start } from "../_app/immutable/start-70cedac5.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 5],
+					params: {id:"op1"},
+					route: {"id":"/blog/[id]"},
+					data: [null,null],
+					form: null
+				},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="10s7w4w"]').parentNode,
+				version: "1669628023989"
+			});
+		</script>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+      //for gituhb
+      var foods = [];
+      var poisons = [];
+      var ships = [];
+      var prevships = [];
+      var deathrate = 10;
+      var deaths;
+      var liferate = 1;
+      var lifes;
+
+      function food(x, y, r) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.render = function() {
+          fill(0, 255, 0);
+          circle(this.x, this.y, this.r);
+        }
+      }
+
+      function poison(x, y, r) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.render = function() {
+          fill(255, 0, 0);
+          circle(this.x, this.y, this.r);
+        }
+      }
+
+      function ship(x, y, h, r) {
+        this.x = x;
+        this.y = y;
+        this.health = h;
+        this.r = r;
+        this.dir = 0;
+        this.speed = this.health;
+        this.target = 0;
+        this.tdir = 0;
+        this.render = function() {
+          fill(map(this.health, 0, 200, 255, 0), map(this.health, 0, 200, 0, 255), 0);
+          push();
+          translate(this.x, this.y);
+          rotate(this.dir);
+          ellipse(this.r / 2, this.r / 2, this.r * 1.6, this.r);
+          fill(0);
+          text(round(this.health), this.r / 2, this.r / 2);
+          pop();
+        }
+        this.tick = function() {
+          var thisx = this.x;
+          var thisy = this.y;
+          this.speed = this.health;
+          this.target = foods.reduce(function(prev, current) {
+            return (dist(thisx, thisy, prev.x, prev.y) < dist(thisx, thisy, current.x, current.y)) ? prev : current
+          });
+          var offset = createVector(this.target.x - this.x, this.target.y - this.y);
+          this.tdir = atan2(offset.y, offset.x);
+          this.incr = (this.tdir - this.dir) / 10;
+          this.dir += this.incr;
+          this.y += -(this.speed / 100) * Math.sin(-this.dir * PI / 180);
+          this.x -= -(this.speed / 100) * Math.cos(-this.dir * PI / 180);
+          this.health -= 0.1;
+          for (var i = foods.length - 1; i > 0; i--) {
+            if (dist(this.x, this.y, foods[i].x, foods[i].y) < 10) {
+              this.health += 100;
+
+              foods.splice(i, 1);
+            }
+          }
+          for (var j = poisons.length - 1; j > 0; j--) {
+            if (dist(this.x, this.y, poisons[j].x, poisons[j].y) < 10) {
+              this.health -= 10;
+              poisons.splice(j, 1);
+            }
+          }
+          if (this.health <= 0) {
+            ships.splice(ships.indexOf(this), 1);
+          }
+          if (this.health >= 200) {
+            ships.push(new ship(this.x, this.y, 100, 10));
+            this.health -= 150;
+          }
+        }
+      }
+
+      function newfood() {
+        if (round(random(0, 1)) === 1) {
+          for (var lifebro = 0; lifebro < liferate; lifebro++) {
+            foods.push(new food(random(width), random(height), 10));
+          }
+        }
+        if (round(random(0, 1)) === 1) {
+
+          for (var youdead = 0; youdead < deathrate; youdead++) {
+            poisons.push(new poison(random(width), random(height), 10));
+          }
+        }
+      }
+
+      function setup() {
+        deaths = createSlider(0, 30, 10);
+        lifes = createSlider(0, 30, 1);
+        setInterval(newfood, 1000);
+        angleMode(DEGREES);
+        createCanvas(windowWidth, windowHeight - 50);
+        for (var i = 0; i < 30; i++) {
+          foods.push(new food(random(width), random(height), 10));
+        }
+        for (var j = 0; j < 20; j++) {
+          poisons.push(new poison(random(width), random(height), 10));
+        }
+        for (var k = 0; k < 1; k++) {
+          ships.push(new ship(random(width), random(height), 100, 10));
+        }
+      }
+
+      function mousePressed() {
+        foods.push(new food(mouseX, mouseY, 10));
+      }
+
+      function drawLines(data, color) {
+        stroke(0);
+        // draw lines
+        let px = 0;
+        let py = data[0];
+        for (let i = 0; i < data.length; i++) {
+          let x = i * (width / (data.length - 1));
+          let y = map(data[i] / 1, 0, height, height, 0);
+          stroke(color[0], color[1], color[2]);
+          line(px, py, x, y);
+          stroke(0, 0, 0)
+          //store the last position
+          px = x;
+          py = y;
+        }
+      }
+
+      function draw() {
+        background(220);
+        deathrate = deaths.value();
+        liferate = lifes.value();
+        foods.forEach(function(piece) {
+          piece.render();
+        });
+        poisons.forEach(function(bad) {
+          bad.render();
+        });
+        ships.forEach(function(shi) {
+          shi.render();
+          shi.tick();
+        });
+        fill(0);
+        textSize(20);
+        text("Ships: " + ships.length, 30, 30);
+        text("Foods: " + foods.length, 30, 60);
+        text("Poisons: " + poisons.length, 30, 90);
+        text("Framerate: " + round(frameRate()), 30, 120);
+        prevships.push(ships.length);
+        drawLines(prevships, [0, 0, 0]);
+        textSize(13);
+      }
+    </script>
+  </body>
+</html>

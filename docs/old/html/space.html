@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script>
+    function setup() {
+			createCanvas(window.innerWidth, window.innerHeight);
+			angleMode(RADIANS);
+
+			for (i = 0; i < 10; i++) {
+				o.push(new gameObject(30,30,"red",Math.floor(Math.random() * (window.innerWidth - 0) ) + 0,Math.floor(Math.random() * (window.innerHeight - 0) ) + 0,0));;
+			}
+		}
+
+		let px = 300;
+		let py = 300;
+		let ang = 0;
+
+		function gameObject(width, height, color, x, y, an) {
+			this.width = width;
+			this.height = height;
+			this.speedX = 3;
+			this.speedY = 3;
+			this.angle = an;
+			this.speed = 5;
+			this.x = x;
+			this.y = y;
+			this.destroyed = false;
+			this.update = function() {
+				push();
+				translate(this.x, this.y);
+				rotate(this.angle);
+				fill(color);
+				rect(this.width / -2, this.height / -2, this.width, this.height);
+				pop();
+			}
+			this.clicked = function() {
+				var myleft = this.x;
+				var myright = this.x + (this.width);
+				var mytop = this.y;
+				var mybottom = this.y + (this.height);
+				var clicked = true;
+				if ((mybottom < mouseY) || (mytop > mouseY) || (myright < mouseX) || (myleft > mouseX)) {
+					clicked = false;
+				}
+				return clicked;
+			}
+			this.hit = function(ox,oy){
+				var myleft = this.x;
+				var myright = this.x + (this.width);
+				var mytop = this.y;
+				var mybottom = this.y + (this.height);
+				var hit = true;
+				if ((mybottom < oy) || (mytop > oy) || (myright < ox) || (myleft > ox)){
+					hit = false;
+				}
+				return hit;
+			}
+			this.godir = function() {
+				this.x += this.speed * Math.sin(this.angle);
+				this.y -= this.speed * Math.cos(this.angle);
+			}
+			this.moveSpeed = function() {}
+			this.destroy = function() {
+				this.destroyed = true;
+				this.speedX = 0;
+				this.speedY = 0;
+				this.angle = 0;
+				this.speed = 0;
+			}
+		}
+
+		//======================================================
+		/**@author lockness Ko*/
+		//======================================================
+
+		var b = [];
+		var o = [];
+
+		function draw() {
+			background(220);
+			ang = Math.atan2(mouseY - py, mouseX - px) + (90 * Math.PI / 180);
+			push();
+			translate(px, py);
+			rotate(ang);
+			tri(0, 0);
+			pop();
+			if (key == 'w') {
+				px += 3 * Math.cos(ang - (90 * Math.PI / 180));
+				py += 3 * Math.sin(ang - (90 * Math.PI / 180));
+			}
+			for (i = 0; i < b.length; i++) {
+				b[i].update();
+				b[i].godir();
+			}
+			for (i = 0; i < o.length; i++) {
+				o[i].update();
+				for (j = 0; j < b.length; j++) {
+					if(o[i].hit(b[j].x,b[j].y)){o.splice(i,1);o.push(new gameObject(30,30,"red",Math.floor(Math.random() * (window.innerWidth - 0) ) + 0,Math.floor(Math.random() * (window.innerHeight - 0) ) + 0,0))}
+				}
+			}
+		}
+
+		function mousePressed() {
+			b.push(new gameObject(10, 10, "black", px, py, ang));
+		}
+
+		function keyReleased() {
+			key = ';'
+		}
+
+		function tri(x, y) {
+			triangle(x - 10, y + 15, x + 10, y + 15, x + 0, y + 0);
+		}
+    </script>
+  </body>
+</html>

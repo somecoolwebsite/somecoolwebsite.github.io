@@ -20,7 +20,7 @@ const config = {
 			pages: 'docs',
       assets: 'docs',
       fallback: null,
-      precompress: true,
+      precompress: false,
       strict: true,
 			trailingSlash: 'always'
 		})

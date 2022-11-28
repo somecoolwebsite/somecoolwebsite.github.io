@@ -1,0 +1,21 @@
+
+<html>
+  <head>
+    <script src="https://somecoolwebsite.github.io/p5/p5/p5.js"></script>
+    <script src="https://somecoolwebsite.github.io/p5/p5/addons/p5.dom.js"></script>
+    <script src="https://unpkg.com/ml5@0.1.3/dist/ml5.min.js"></script>
+    <script src="js/classify.js"></script><!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131001827-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-131001827-2');
+		</script>
+  </head>
+  <body>
+    <p id="status">Loading Model...</p>
+    <p>apparently, according to AI this image is a <span id="result">...</span> and the AI was <span id="probability">...</span> confident.</p>
+    <input type="file" name="d" id="img" accept="*">
+  </body>
+</html>

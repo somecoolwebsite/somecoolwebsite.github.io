@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="../_app/immutable/assets/_layout-985a1069.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page-cc4ed907.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/start-70cedac5.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/index-fd23df92.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/singletons-63d3d646.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/preload-helper-9b728935.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-c326c751.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/_layout.ts-b8ee4d7c.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_layout-1daba58d.js">
+		<link rel="modulepreload" href="../_app/immutable/components/pages/blog/_id_/_page.svelte-b9f3e1d6.js">
+		<link rel="modulepreload" href="../_app/immutable/modules/pages/blog/_id_/_page.ts-aa22a930.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/_page-2bf9b660.js">
+	</head>
+	<body>
+		<div style="display: contents">
+
+
+<header class="svelte-12e77qa"><a href="/" class="svelte-12e77qa">Home</a>
+
+  <nav><ul class="svelte-12e77qa"><li><a href="/blog" class="svelte-12e77qa">Blog</a></li>
+      <li><a href="/about" class="svelte-12e77qa">About</a></li>
+      <li><a href="/contact" class="svelte-12e77qa">Contact</a></li></ul></nav>
+</header>
+
+<main><article><h1 class="svelte-7aimqn">Tor</h1>
+  <p>Published: tbd</p>
+  <hr>
+  <div class="main-post"><h1>NOT FINISHED check back later</h1>
+<p>This post is about how I setup, and use #torforgood. </p>
+<h2>$ tl;dr</h2>
+<p>I use tor for</p>
+<ul><li><a href="https://add.startpage.com/" rel="nofollow">Everyday web-browsing</a></li>
+<li><a href="https://github.com/alecmuffett/dohot" rel="nofollow">DNS over HTTPS</a></li>
+<li><a href="http://hkrhcavbuzxya3dpfetlnp5cuahujfbhqchvv5usf3xlhpjbm4wgn6ad.onion/" rel="nofollow">Hosting an onion mirror of this website</a> (only available via http but it is E2EE so no need to worry (<code>you -http over tor&gt; proxy -https&gt; www.lockness.pro</code>))</li></ul>
+<p>And you should too! (<a href>for reasons stated in this good defcon talk</a>)</p>
+<h2>$ Setting up tor</h2>
+<p>This is for <strong>linux</strong> users only! I may add tutorials for windows or macOS in the future, but, for now I cannot be bothered. If you would like more anonymity, please do not use windows or macOS (even if you’ve run one of those shady scripts that supposedly disables telemetry). Windows and macOS are also hard to lock down and get to do EXACTLY what you want them to do.</p>
+<h3>&gt; Annoyances</h3>
+<p>Many people don’t use tor because it is slow. This is true, for the most part, but if your threat model isn’t crazy and you are not a political dissident then you may choose to only use DNS over HTTPS over TOR (DoHoT). DoHoT proxies your dns over https, through tor. This stops ‘big data’ companies from being able to associate dns requests with IP addresses.</p>
+<p>There is not documentation that I can find easily IN the torproject website on <a href="https://gist.github.com/mort3za/b28495d7e42e628e7b7c9346488b5e93" rel="nofollow">how to add tor bridges to the torrc</a>. Only tutorials on how to add bridges to the tor browser, the recommended way to browse with tor. </p>
+<p>side note:</p>
+<blockquote><p>Although it is discouraged to not use the tor browser when browsing with tor, this is meant for people who ‘need to hide’ as a protection against being deanonymized. If you are an everyday user who doesn’t have a risk of being specifically targeted by an advanced threat, not using the tor browser is fine.</p></blockquote>
+<p>This makes it hard (without looking through the gitlab docs for torrc) </p></div>
+</article></main>
+
+
+		<script type="module" data-sveltekit-hydrate="gp37dv">
+			import { start } from "../_app/immutable/start-70cedac5.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 5],
+					params: {id:"tor"},
+					route: {"id":"/blog/[id]"},
+					data: [null,null],
+					form: null
+				},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="gp37dv"]').parentNode,
+				version: "1669628023989"
+			});
+		</script>
+	</div>
+	</body>
+</html>

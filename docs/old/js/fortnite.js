@@ -1,0 +1,1 @@
+document.body.innerHTML = "<iframe width="+window.innerWidth+" height="+window.innerHeight+" src=\"https://www.youtube.com/embed/AqpYHdv3S00?&autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
