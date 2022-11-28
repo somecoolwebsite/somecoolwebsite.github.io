@@ -19,7 +19,7 @@
 <style>
   header {
     padding: 1rem;
-    background: #333;
+    background: #423;
     color: #eee;
     display: flex;
     flex-wrap: wrap;

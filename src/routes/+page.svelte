@@ -8,6 +8,7 @@
 <ol>
   <li>It does not require javascript to work! (I hate websites that unnecessarily force you to use javascript)</li>
   <li>It's powered by svelte</li>
+  <li>This font is designed to make you feel uncomfortable</li>
 </ol>
 
 <h2>Here is my current profile picture</h2>

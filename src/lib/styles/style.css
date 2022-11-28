@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral&display=swap');
+
 body {
   color: #eee;
-  background-color: #222;
+  font-family: 'Spectral', serif;
+  background-color: #322;
 }
 
 img {
@@ -12,9 +15,9 @@ main {
 }
 
 a {
-  color: #faa;
+  color: #f88;
 }
 
 h1 {
-  color: #faa;
+  color: #caa;
 }
