@@ -1,6 +1,6 @@
 {
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "_app/immutable/start-0264c492.js",
+    "file": "_app/immutable/start-615de4d0.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -98,12 +98,12 @@
     ]
   },
   "src/routes/blog/[id]/+page.ts": {
-    "file": "_app/immutable/modules/pages/blog/_id_/_page.ts-3abe09bc.js",
+    "file": "_app/immutable/modules/pages/blog/_id_/_page.ts-0c0abdf9.js",
     "src": "src/routes/blog/[id]/+page.ts",
     "isEntry": true,
     "imports": [
       "_preload-helper-9b728935.js",
-      "__page-a4aa3b98.js"
+      "__page-fc8f9a6b.js"
     ]
   },
   "_singletons-6e10c44c.js": {
@@ -124,14 +124,15 @@
   "__page-69b2005d.js": {
     "file": "_app/immutable/chunks/_page-69b2005d.js"
   },
-  "__page-a4aa3b98.js": {
-    "file": "_app/immutable/chunks/_page-a4aa3b98.js",
+  "__page-fc8f9a6b.js": {
+    "file": "_app/immutable/chunks/_page-fc8f9a6b.js",
     "imports": [
       "_preload-helper-9b728935.js"
     ],
     "dynamicImports": [
       "src/routes/blog/discord.md",
       "src/routes/blog/malware.md",
+      "src/routes/blog/more_malware.md",
       "src/routes/blog/op1.md",
       "src/routes/blog/tor.md"
     ]
@@ -179,11 +180,11 @@
     ]
   },
   ".svelte-kit/generated/nodes/5.js": {
-    "file": "_app/immutable/chunks/5-bc52cbec.js",
+    "file": "_app/immutable/chunks/5-d24f0b4b.js",
     "src": ".svelte-kit/generated/nodes/5.js",
     "isDynamicEntry": true,
     "imports": [
-      "__page-a4aa3b98.js",
+      "__page-fc8f9a6b.js",
       "src/routes/blog/[id]/+page.svelte"
     ]
   },
@@ -206,6 +207,14 @@
   "src/routes/blog/malware.md": {
     "file": "_app/immutable/chunks/malware-322ecadf.js",
     "src": "src/routes/blog/malware.md",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-35e6351d.js"
+    ]
+  },
+  "src/routes/blog/more_malware.md": {
+    "file": "_app/immutable/chunks/more_malware-9dbf0f1c.js",
+    "src": "src/routes/blog/more_malware.md",
     "isDynamicEntry": true,
     "imports": [
       "_index-35e6351d.js"
