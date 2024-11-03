@@ -1,0 +1,180 @@
+{
+  "type": "bundle",
+  "id": "bundle--bf4ef873-08e4-462c-bbef-ee8bc21df435",
+  "spec_version": "2.1",
+  "objects": [
+    {
+      "type": "indicator",
+      "id": "indicator--cef18db9-72f4-4610-9d82-ce901bc0f8c3",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "ms-defender-analytics.line.pm",
+      "description": "C2 domain. Active as of 2024-11-03.",
+      "pattern": "[network-traffic:dst_ref.type = 'domain-name' AND network-traffic:dst_ref.value = 'ms-defender-analytics.line.pm']",
+      "pattern_type": "stix",
+      "indicator_types": ["malicious-activity"],
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "indicator",
+      "id": "indicator--d5091a5e-f68c-4985-9405-3d97be974c8b",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "ms-analytics.mywire.org",
+      "description": "C2 domain. Active as of 2024-11-03.",
+      "pattern": "[network-traffic:dst_ref.type = 'domain-name' AND network-traffic:dst_ref.value = 'ms-analytics.mywire.org']",
+      "pattern_type": "stix",
+      "indicator_types": ["malicious-activity"],
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "indicator",
+      "id": "indicator--864343db-1195-4f60-98b9-3a85e9c2e00d",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "ms-cdn.viewdns.net",
+      "description": "C2 domain. Inactive as of 2024-11-02.",
+      "pattern": "[network-traffic:dst_ref.type = 'domain-name' AND network-traffic:dst_ref.value = 'ms-cdn.viewdns.net']",
+      "pattern_type": "stix",
+      "indicator_types": ["malicious-activity"],
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "indicator",
+      "id": "indicator--1dd5fd3e-1224-4788-b823-f49acd85c393",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "45.9.149.215",
+      "description": "IP resolved by domains. Active as of 2024-11-03.",
+      "pattern": "[network-traffic:dst_ref.type = 'ipv4-addr' AND network-traffic:dst_ref.value = '45.9.149.215']",
+      "pattern_type": "stix",
+      "indicator_types": ["malicious-activity"],
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6736dd98-7968-4b3d-9ebd-8673f24a88c2",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "FastMath.dll hash",
+      "description": "FastMath.dll malicious DLL found in mod",
+      "indicator_types": [
+          "malicious-activity"
+      ],
+      "pattern": "[file:hashes.'SHA-256' = '8c6c3f9b3fd8497322cd9e798790aa3485a44f9c5418bb4aa97b630a3fb8cead']",
+      "pattern_type": "stix",
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d9ea40bd-791c-4c3f-806f-ee6cc53ddddb",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "Stage 2 hash",
+      "description": "FastMath.dll stage 2 dll",
+      "indicator_types": [
+          "malicious-activity"
+      ],
+      "pattern": "[file:hashes.'SHA-256' = '671c26b7d17db3af70f7ad24e48cf9eabdbac68a9604fa1b803608cff8a5df79']",
+      "pattern_type": "stix",
+      "valid_from": "2024-10-20T00:00:00.000000"
+    },
+    {
+      "type": "malware",
+      "id": "malware--4c154267-48b6-41a0-8782-794bef782253",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "name": "ExoTickler",
+      "description": "Exodus Wallet Stealer",
+      "malware_types": ["trojan"],
+      "capabilities": ["anti-debugging", "communicates-with-c2", "exfiltrates-data", "fingerprints-host", "hides-executing-code", "steals-authentication-credentials"]
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--362dee75-8ce4-4847-bb5f-94ba50ddb7a7",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "indicates",
+      "source_ref": "indicator--cef18db9-72f4-4610-9d82-ce901bc0f8c3",
+      "target_ref": "malware--4c154267-48b6-41a0-8782-794bef782253"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--1cf0dda2-5265-4d35-ae48-9193dc6f1045",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "indicates",
+      "source_ref": "indicator--d5091a5e-f68c-4985-9405-3d97be974c8b",
+      "target_ref": "malware--4c154267-48b6-41a0-8782-794bef782253"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--c93b6a57-9b79-44d7-a11e-cf35d7ce1e49",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "indicates",
+      "source_ref": "indicator--864343db-1195-4f60-98b9-3a85e9c2e00d",
+      "target_ref": "malware--4c154267-48b6-41a0-8782-794bef782253"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--c778e59a-563a-4195-9b6c-e48ec1a9d001",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "resolves-to",
+      "source_ref": "indicator--cef18db9-72f4-4610-9d82-ce901bc0f8c3",
+      "target_ref": "indicator--1dd5fd3e-1224-4788-b823-f49acd85c393"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--20c3e5ea-702b-4b11-bd66-e6e70d4d5c6f",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "resolves-to",
+      "source_ref": "indicator--d5091a5e-f68c-4985-9405-3d97be974c8b",
+      "target_ref": "indicator--1dd5fd3e-1224-4788-b823-f49acd85c393"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--d405d2d9-5fbc-4905-abb5-549769133458",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "resolves-to",
+      "source_ref": "indicator--864343db-1195-4f60-98b9-3a85e9c2e00d",
+      "target_ref": "indicator--1dd5fd3e-1224-4788-b823-f49acd85c393"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--6bcdd7c1-f090-4f0e-b467-61f852d97eb7",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "indicates",
+      "source_ref": "indicator--6736dd98-7968-4b3d-9ebd-8673f24a88c2",
+      "target_ref": "malware--4c154267-48b6-41a0-8782-794bef782253"
+    },
+    {
+      "type": "relationship",
+      "id": "relationship--f876387e-1cc5-4a4c-bbca-272fac8f59d8",
+      "spec_version": "2.1",
+      "created": "2024-11-03T12:47:46.159750",
+      "modified": "2024-11-03T12:47:46.159750",
+      "relation_type": "unpacks-and-loads",
+      "source_ref": "indicator--d9ea40bd-791c-4c3f-806f-ee6cc53ddddb",
+      "target_ref": "malware--4c154267-48b6-41a0-8782-794bef782253"
+    }
+  ]
+}
