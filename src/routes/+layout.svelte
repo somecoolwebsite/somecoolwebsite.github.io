@@ -10,7 +10,7 @@
 <main>
   <slot />
 <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon={token}></script>
+  {@html '<script defer src=\'https://static.cloudflareinsights.com/beacon.min.js\' data-cf-beacon=\'{"token": "6e484827d6d940bc9806ee8ffc5be0b9"}\'></script>'}
 <!-- End Cloudflare Web Analytics -->
 </main>
 
